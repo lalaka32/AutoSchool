@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Common.Entities
 {
-	class EmployeeLecturer
+	public class EmployeeLecturer
 	{
 		public int AutoSchoolId { get; set; }
 

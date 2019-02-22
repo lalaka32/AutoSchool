@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Common.Entities
 {
-	class RulesSection
+	public class RulesSection
 	{
 		public int Id { get; set; }
 

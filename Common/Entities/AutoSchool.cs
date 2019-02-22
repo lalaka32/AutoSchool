@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Common.Entities
 {
-	class AutoSchool
+	public class AutoSchool
 	{
 		public int Id { get; set; }
 

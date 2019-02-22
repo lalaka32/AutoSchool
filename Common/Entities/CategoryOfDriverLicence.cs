@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Common.Entities
 {
-	class CategoryOfDriverLicence
+	public class CategoryOfDriverLicence
 	{
 		public int Id { get; set; }
 
