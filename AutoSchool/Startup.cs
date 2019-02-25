@@ -1,4 +1,6 @@
 using DataService;
+using DataService.Services.Implementations;
+using DataService.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -23,6 +25,8 @@ namespace AutoSchool
 		{
 			string connectionString = Configuration.GetConnectionString("DefaultConnection");
 			services.AddDbContext<AutoSchoolContext>(options => options.UseSqlServer(connectionString));
+
+			services.AddTransient<IUserStoreService, UserStoreService>();
 
 			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
