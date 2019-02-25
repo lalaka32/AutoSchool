@@ -26,6 +26,8 @@ namespace DataService
 
 		public DbSet<TestResult> TestResults { get; set; }
 
+		public DbSet<TestRules> TestRules { get; set; }
+
 		public DbSet<User> Users { get; set; }
 
 		public AutoSchoolContext(DbContextOptions<AutoSchoolContext> options) : base(options)

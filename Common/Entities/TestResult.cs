@@ -12,10 +12,13 @@ namespace Common.Entities
 
 		public User User { get; set; }
 
-		public int RulesSectionId { get; set; }
-
-		public RulesSection RulesSection { get; set; }
+		public ICollection<TestRules> RulesSections { get; set; }
 
 		public bool Success { get; set; }
+
+		public TestResult()
+		{
+			RulesSections = new List<TestRules>();
+		}
 	}
 }
