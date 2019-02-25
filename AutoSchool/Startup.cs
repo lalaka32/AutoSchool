@@ -27,6 +27,8 @@ namespace AutoSchool
 			services.AddDbContext<AutoSchoolContext>(options => options.UseSqlServer(connectionString));
 
 			services.AddTransient<IUserStoreService, UserStoreService>();
+			services.AddTransient<ITestResultStoreService, TestResultStoreService>();
+
 
 			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
