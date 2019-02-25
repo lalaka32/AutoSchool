@@ -1,8 +1,10 @@
+using DataService;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -19,6 +21,9 @@ namespace AutoSchool
 
 		public void ConfigureServices(IServiceCollection services)
 		{
+			string connectionString = Configuration.GetConnectionString("DefaultConnection");
+			services.AddDbContext<AutoSchoolContext>(options => options.UseSqlServer(connectionString));
+
 			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
 			services.AddSpaStaticFiles(configuration =>

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace DataService
 {
-	class AutoSchoolContext : DbContext
+	public class AutoSchoolContext : DbContext
 	{
 		public DbSet<AutoClassGroupe> AutoClassGroupes { get; set; }
 
