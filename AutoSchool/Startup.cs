@@ -29,6 +29,7 @@ namespace AutoSchool
 			services.AddTransient<IUserStoreService, UserStoreService>();
 			services.AddTransient<ITestResultStoreService, TestResultStoreService>();
 
+
 			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
 			services.AddSpaStaticFiles(configuration =>
