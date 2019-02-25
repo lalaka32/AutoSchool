@@ -20,7 +20,8 @@ namespace AutoSchool.Controllers
 			this.userStoreService = userStoreService;
 		}
 
-		public IActionResult Post(User user)
+		[HttpPost("[action]")]
+		public IActionResult Post([FromBody]User user)
 		{
 			userStoreService.AddUser(user);
 			return Ok();
