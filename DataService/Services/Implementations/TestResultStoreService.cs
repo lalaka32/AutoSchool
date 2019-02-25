@@ -6,18 +6,18 @@ using System.Text;
 
 namespace DataService.Services.Implementations
 {
-	public class UserStoreService : IUserStoreService
+	public class TestResultStoreService : ITestResultStoreService
 	{
 		readonly AutoSchoolContext storeContext;
 
-		public UserStoreService(AutoSchoolContext storeContext)
+		public TestResultStoreService(AutoSchoolContext storeContext)
 		{
 			this.storeContext = storeContext;
 		}
 
-		public void AddUser(User user)
+		public void AddTestResult(TestResult testResult)
 		{
-			storeContext.Users.Add(user);
+			storeContext.TestResults.Add(testResult);
 			storeContext.SaveChanges();
 		}
 	}
