@@ -6,7 +6,7 @@ using System.Text;
 
 namespace DataService
 {
-	class AutoSchoolContext : DbContext
+	public class AutoSchoolContext : DbContext
 	{
 		public DbSet<AutoClassGroupe> AutoClassGroupes { get; set; }
 
@@ -25,6 +25,8 @@ namespace DataService
 		public DbSet<RulesSection> RulesSections { get; set; }
 
 		public DbSet<TestResult> TestResults { get; set; }
+
+		public DbSet<TestRules> TestRules { get; set; }
 
 		public DbSet<User> Users { get; set; }
 
