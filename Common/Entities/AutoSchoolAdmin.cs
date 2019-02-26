@@ -8,9 +8,9 @@ namespace Common.Entities
 	{
 		public int Id { get; set; }
 
-		public int UserId { get; set; }
+		public int AdminId { get; set; }
 
-		public User User { get; set; }
+		public User Admin { get; set; }
 
 		public int AutoSchoolId { get; set; }
 
