@@ -12,7 +12,7 @@ namespace Common.Entities
 
 		public User Lecturer { get; set; }
 
-		public int StudentId { get; set; }
+		public int? StudentId { get; set; }
 
 		public User Student { get; set; }
 

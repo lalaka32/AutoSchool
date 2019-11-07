@@ -18,6 +18,7 @@ namespace DataService.Services.Implementations
 		public void AddUser(User user)
 		{
 			storeContext.Users.Add(user);
+
 			storeContext.SaveChanges();
 		}
 	}

@@ -31,8 +31,25 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\shared\interceptors\httpInterceptor.ts" />
+    <None Remove="ClientApp\src\app\shared\services\AuthorizationCheck.ts" />
+    <None Remove="ClientApp\src\app\shared\services\AuthService.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj" />
     <ProjectReference Include="..\DataService\DataService.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ClientApp\src\app\login\" />
+    <Folder Include="ClientApp\src\app\shared\viewModels\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\shared\interceptors\httpInterceptor.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\shared\services\AuthorizationCheck.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\shared\services\AuthService.ts" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
