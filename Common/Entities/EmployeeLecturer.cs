@@ -14,6 +14,6 @@ namespace Common.Entities
 
 		public int LecturerId { get; set; }
 
-		public Lecturer Lecturer { get; set; }
+		public User Lecturer { get; set; }
 	}
 }
