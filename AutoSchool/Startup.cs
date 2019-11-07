@@ -1,4 +1,5 @@
 using AutoSchool.Authorization;
+using DataAccess;
 using DataService;
 using DataService.Services.Implementations;
 using DataService.Services.Interfaces;

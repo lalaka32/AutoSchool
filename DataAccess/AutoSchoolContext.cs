@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DataService
+namespace DataAccess
 {
 	public class AutoSchoolContext : DbContext
 	{
