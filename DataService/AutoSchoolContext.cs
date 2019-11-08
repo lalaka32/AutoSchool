@@ -30,6 +30,10 @@ namespace DataService
 
 		public DbSet<User> Users { get; set; }
 
+		public DbSet<Car> Cars { get; set; }
+
+		public DbSet<DrivingMaster> DrivingMasters { get; set; }
+
 		public AutoSchoolContext(DbContextOptions<AutoSchoolContext> options) : base(options)
 		{
 			Database.EnsureCreated();
