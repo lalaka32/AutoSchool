@@ -8,16 +8,16 @@ namespace Common.Entities
 	{
 		public int Id { get; set; }
 
-		public int LecturerId { get; set; }
+		//public int LecturerId { get; set; }
 
-		public Lecturer Lecturer { get; set; }
+		//public User Lecturer { get; set; }
 
-		public int StudentId { get; set; }
+		//public int? StudentId { get; set; }
 
-		public User Student { get; set; }
+		//public User Student { get; set; }
 
-		public int CategoryOfDriverLicenceId { get; set; }
+		//public int CategoryOfDriverLicenceId { get; set; }
 
-		public CategoryOfDriverLicence CategoryOfDriverLicence { get; set; }
+		//public CategoryOfDriverLicence CategoryOfDriverLicence { get; set; }
 	}
 }
