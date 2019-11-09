@@ -1,23 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using UI.Models.Mapper;
 using DataService.Mapper;
 using AutoMapper;
-using DataService.Services.Implementations;
-using DataService.Services.Interfaces;
-using DataAccess.Implementations;
-using DataAccess.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using DataAccess;
+using Common.MiddleWare.Extentions;
 
 namespace UI
 {
@@ -47,8 +39,9 @@ namespace UI
                 typeof(DrivingTestMappingProfile).Assembly, // data service mapping profiles
                 typeof(DrivingTestWebMappingProfile).Assembly); // bisness logic mapping profiles
 
-            services.AddTransient<IDrivingTestService, DrivingTestService>();
-            services.AddTransient<IDrivingTestRepository, DrivingTestRepository>();
+            services.AddBusinessLogic();
+
+            services.AddDataAccess();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }

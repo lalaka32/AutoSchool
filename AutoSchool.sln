@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess", "DataAccess\DataAccess.csproj", "{830AF77B-BB8E-4F71-85AB-A9000BAD4C25}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI", "UI\UI.csproj", "{3A0EC235-4154-4AA2-A632-CEF2A19EC538}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UI", "UI\UI.csproj", "{3A0EC235-4154-4AA2-A632-CEF2A19EC538}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Middleware", "Middleware\Middleware.csproj", "{C79D491B-DC39-4FB9-915D-E829F05025EA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{3A0EC235-4154-4AA2-A632-CEF2A19EC538}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3A0EC235-4154-4AA2-A632-CEF2A19EC538}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3A0EC235-4154-4AA2-A632-CEF2A19EC538}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C79D491B-DC39-4FB9-915D-E829F05025EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C79D491B-DC39-4FB9-915D-E829F05025EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C79D491B-DC39-4FB9-915D-E829F05025EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C79D491B-DC39-4FB9-915D-E829F05025EA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
