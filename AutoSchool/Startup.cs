@@ -1,6 +1,9 @@
+using AutoMapper;
 using AutoSchool.Authorization;
+using AutoSchool.Mapper;
 using DataAccess;
 using DataService;
+using DataService.Mapper;
 using DataService.Services.Implementations;
 using DataService.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -60,6 +63,10 @@ namespace AutoSchool
                     o.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
                 }
             );
+
+            services.AddAutoMapper(
+             typeof(DrivingTestMappingProfile).Assembly, // data service mapping profiles
+             typeof(DrivingTestMapper).Assembly); // bisness logic mapping profiles
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 

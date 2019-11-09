@@ -43,16 +43,9 @@ namespace UI
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<AutoSchoolContext>(options => options.UseSqlServer(connectionString));
 
-            var mappingConfig = new MapperConfiguration(mc =>
-            {
-                mc.AddProfiles(new List<Profile> {
-                    new DrivingTestMappingProfile(),
-                    new DrivingTestMapper()
-                });
-            });
-
-            IMapper mapper = mappingConfig.CreateMapper();
-            services.AddSingleton(mapper);
+            services.AddAutoMapper(
+                typeof(DrivingTestMappingProfile).Assembly, // data service mapping profiles
+                typeof(DrivingTestMapper).Assembly); // bisness logic mapping profiles
 
             services.AddTransient<IDrivingTestService, DrivingTestService>();
             services.AddTransient<IDrivingTestRepository, DrivingTestRepository>();
