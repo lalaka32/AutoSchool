@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoSchool.Authorization;
+using Common.BisnessObjects;
 using Common.Entities;
 using DataService.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
