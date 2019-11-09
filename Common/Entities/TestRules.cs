@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common.BisnessObjects;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -12,8 +13,8 @@ namespace Common.Entities
 
 		public RulesSection RulesSections { get; set; }
 
-		public int TestResultId { get; set; }
+		public int DrivingTestId { get; set; }
 
-		public TestResult TestResult { get; set; }
+		public DrivingTest DrivingTest { get; set; }
 	}
 }

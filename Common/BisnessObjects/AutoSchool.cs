@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Common.Entities
+namespace Common.BisnessObjects
 {
 	public class AutoSchool
 	{

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Common.BisnessObjects;
 using Common.Entities;
 using DataAccess;
 using DataService.Services.Interfaces;

@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Common.BisnessObjects;
 using Common.Entities;
+using DataService.Services.Implementations;
 using DataService.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,17 +15,17 @@ namespace AutoSchool.Controllers
     [ApiController]
     public class TestResultController : ControllerBase
     {
-		readonly ITestResultStoreService testResultStoreService;
+		readonly DrivingTestService testResultStoreService;
 
-		public TestResultController(ITestResultStoreService testResultStoreService)
+		public TestResultController(DrivingTestService testResultStoreService)
 		{
 			this.testResultStoreService = testResultStoreService;
 		}
 
 		[HttpPost("[action]")]
-		public IActionResult Post([FromBody]TestResult testResult)
+		public IActionResult Post([FromBody]DrivingTest testResult)
 		{
-			testResultStoreService.AddTestResult(testResult);
+			//testResultStoreService.AddTestResult(testResult);
 			//userStoreService.AddUser(user);
 			return Ok();
 		}

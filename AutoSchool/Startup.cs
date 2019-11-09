@@ -34,7 +34,7 @@ namespace AutoSchool
 
             services.AddTransient<IRegistrationService, RegistrationService>();
             services.AddTransient<IUserStoreService, UserStoreService>();
-			services.AddTransient<ITestResultStoreService, TestResultStoreService>();
+			services.AddTransient<DrivingTestService, DrivingTestService>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>

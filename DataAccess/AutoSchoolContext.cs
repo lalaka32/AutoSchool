@@ -1,4 +1,5 @@
-﻿using Common.Entities;
+﻿using Common.BisnessObjects;
+using Common.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace DataAccess
 
 		public DbSet<Role> Roles { get; set; }
 
-		public DbSet<TestResult> TestResults { get; set; }
+		public DbSet<DrivingTest> DrivingTests { get; set; }
 
 		public DbSet<TestRules> TestRules { get; set; }
 
