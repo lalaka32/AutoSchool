@@ -45,7 +45,7 @@ namespace UI
 
             services.AddAutoMapper(
                 typeof(DrivingTestMappingProfile).Assembly, // data service mapping profiles
-                typeof(DrivingTestMapper).Assembly); // bisness logic mapping profiles
+                typeof(DrivingTestWebMappingProfile).Assembly); // bisness logic mapping profiles
 
             services.AddTransient<IDrivingTestService, DrivingTestService>();
             services.AddTransient<IDrivingTestRepository, DrivingTestRepository>();

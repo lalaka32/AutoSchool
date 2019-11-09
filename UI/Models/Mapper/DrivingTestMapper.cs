@@ -4,9 +4,9 @@ using UI.Models.DrivingTest;
 
 namespace UI.Models.Mapper
 {
-    public class DrivingTestMapper : Profile
+    public class DrivingTestWebMappingProfile : Profile
     {
-        public DrivingTestMapper()
+        public DrivingTestWebMappingProfile()
         {
             CreateMap<DrivingTestCollectionItemDto, DrivingTestCollectionItemModel>();
         }

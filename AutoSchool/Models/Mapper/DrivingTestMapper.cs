@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace AutoSchool.Mapper
+namespace AutoSchool.Models.Mapper
 {
-    public class DrivingTestMapper : Profile
+    public class DrivingTestWebMappingProfile : Profile
     {
     }
 }

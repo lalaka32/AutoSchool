@@ -1,6 +1,6 @@
 using AutoMapper;
 using AutoSchool.Authorization;
-using AutoSchool.Mapper;
+using AutoSchool.Models.Mapper;
 using DataAccess;
 using DataService;
 using DataService.Mapper;
@@ -66,7 +66,7 @@ namespace AutoSchool
 
             services.AddAutoMapper(
              typeof(DrivingTestMappingProfile).Assembly, // data service mapping profiles
-             typeof(DrivingTestMapper).Assembly); // bisness logic mapping profiles
+             typeof(DrivingTestWebMappingProfile).Assembly); // bisness logic mapping profiles
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
