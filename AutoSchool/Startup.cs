@@ -33,10 +33,6 @@ namespace AutoSchool
 			string connectionString = Configuration.GetConnectionString("DefaultConnection");
 			services.AddDbContext<AutoSchoolContext>(options => options.UseSqlServer(connectionString));
 
-            services.AddTransient<IRegistrationService, RegistrationService>();
-            services.AddTransient<IUserStoreService, UserStoreService>();
-			services.AddTransient<DrivingTestService, DrivingTestService>();
-
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {

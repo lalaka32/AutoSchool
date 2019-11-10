@@ -1,6 +1,7 @@
 ﻿using Common.BisnessObjects;
 using Common.DataContracts.DrivingTest;
 using DataAccess.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -22,6 +23,7 @@ namespace DataAccess.Implementations
                 .Take(filter.Take)
                 .Where(x => x.UserId == filter.UserId)
                 .OrderBy(x => x.UpdatedAt)
+                .AsNoTracking()
                 .ToList();
             return result.AsReadOnly();
         }

@@ -14,9 +14,9 @@ namespace AutoSchool.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-		IUserStoreService userStoreService;
+		IUserService userStoreService;
 
-		public UsersController(IUserStoreService userStoreService)
+		public UsersController(IUserService userStoreService)
 		{
 			this.userStoreService = userStoreService;
 		}
@@ -24,7 +24,8 @@ namespace AutoSchool.Controllers
 		[HttpPost("[action]")]
 		public IActionResult Post([FromBody]User user)
 		{
-			userStoreService.AddUser(user);
+            //userStoreService.Create(user);
+            throw new NotImplementedException();
 			return Ok();
 		}
         [HttpGet("[action]")]

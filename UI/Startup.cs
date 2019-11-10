@@ -10,6 +10,7 @@ using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using DataAccess;
 using Common.MiddleWare.Extentions;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace UI
 {
@@ -43,6 +44,13 @@ namespace UI
 
             services.AddDataAccess();
 
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+             .AddCookie();
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+            //services.AddTransient<IAuthenticationService, CookieAuthenticationService>();
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
@@ -63,6 +71,8 @@ namespace UI
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+
+            app.UseAuthentication();
 
             app.UseMvc();
         }

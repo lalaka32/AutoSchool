@@ -1,0 +1,19 @@
+﻿@page
+@model UI.Pages.User.LoginModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+<h1>Please Login</h1>
+
+<form method="post">
+    <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+    <label for="login">Login</label><br />
+    <input type="text" name="login" id="login" asp-for="loginModel.Login" required /><br /><br />
+    <span asp-validation-for="loginModel.Login" class="text-danger"></span>
+    <label for="password">Password</label><br />
+    <input name="password" id="password" asp-for="loginModel.Password" type="password" required /><br /><br />
+    <span asp-validation-for="loginModel.Password" class="text-danger"></span>
+    <input type="submit" value="Login" />
+    <a asp-page="Register">SignUp</a>
+</form>
