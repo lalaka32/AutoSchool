@@ -1,16 +1,17 @@
+using AutoMapper;
 using AutoSchool.Authorization;
+using AutoSchool.Models.Mapper;
+using Common.MiddleWare.Extentions;
 using DataAccess;
-using DataService;
+using DataService.Mapper;
 using DataService.Services.Implementations;
 using DataService.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
@@ -18,7 +19,7 @@ using Newtonsoft.Json.Serialization;
 
 namespace AutoSchool
 {
-	public class Startup
+    public class Startup
 	{
 		public Startup(IConfiguration configuration)
 		{
@@ -34,7 +35,7 @@ namespace AutoSchool
 
             services.AddTransient<IRegistrationService, RegistrationService>();
             services.AddTransient<IUserStoreService, UserStoreService>();
-			services.AddTransient<ITestResultStoreService, TestResultStoreService>();
+			services.AddTransient<DrivingTestService, DrivingTestService>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
@@ -60,6 +61,14 @@ namespace AutoSchool
                     o.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
                 }
             );
+
+            services.AddAutoMapper(
+             typeof(DrivingTestMappingProfile).Assembly, // data service mapping profiles
+             typeof(DrivingTestWebMappingProfile).Assembly); // bisness logic mapping profiles
+
+            services.AddBusinessLogic();
+
+            services.AddDataAccess();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 

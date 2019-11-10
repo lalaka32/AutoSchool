@@ -1,0 +1,29 @@
+﻿@page
+@model UI.Pages.DrivingTest.IndexModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>History</h1>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Updated</th>
+            <th scope="col">Result</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for(var i = 0; i < Model.testModels.Length; i++)
+        {
+            <tr>
+                <th scope="row">@i</th>
+                <td>@Model.testModels[i].UpdatedAt</td>
+                <td>@Model.testModels[i].Success</td>
+                <td>Details</td>
+            </tr>
+        }
+    </tbody>
+</table>

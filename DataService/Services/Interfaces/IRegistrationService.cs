@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Common.BisnessObjects;
 using Common.Entities;
 
 namespace DataService.Services.Interfaces

@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Common.Entities;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Common.Entities
+namespace Common.BisnessObjects
 {
 	public class User
 	{
