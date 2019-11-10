@@ -27,5 +27,11 @@ namespace AutoSchool.Controllers
 			userStoreService.AddUser(user);
 			return Ok();
 		}
-	}
+        [HttpGet("[action]")]
+        public IActionResult Get()
+        {
+            userStoreService.AddUser(new User());
+            return Ok();
+        }
+    }
 }
