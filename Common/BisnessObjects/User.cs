@@ -17,8 +17,8 @@ namespace Common.BisnessObjects
 
 		public string Password { get; set; }
 
-        public int ProgressId { get; set; }
+       // public int ProgressId { get; set; }
 
-        public Progress Progress { get; set; }
+       // public Progress Progress { get; set; }
     }
 }

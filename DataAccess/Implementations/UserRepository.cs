@@ -7,25 +7,24 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using AutoMapper;
 
 namespace DataAccess.Implementations
 {
     public class UserRepository : IUserRepository
     {
         private readonly AutoSchoolContext _context;
+        private readonly IMapper _mapper;
 
-        public UserRepository(AutoSchoolContext context)
+        public UserRepository(AutoSchoolContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
+
         public int Create(UserCreateDto dto)
         {
-            var entity = new User
-            {
-                Login = dto.Login,
-                Password = dto.Password,
-                RoleId = dto.RoleId
-            };
+            var entity = _mapper.Map<User>(dto);
             _context.Users.Add(entity);
             _context.SaveChanges();
             return entity.Id;

@@ -9,7 +9,7 @@ using DataService.Services.Interfaces;
 
 namespace DataService.Services.Implementations
 {
-    public class RegistrationService : IRegistrationService
+    public class RegistrationService 
     {
         public RegistrationService(AutoSchoolContext context)
         {

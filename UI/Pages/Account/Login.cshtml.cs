@@ -16,9 +16,9 @@ namespace UI.Pages.User
     public class LoginModel : PageModel
     {
         private readonly IMapper _mapper;
-        private readonly IAuthenticationService _authenticationService;
+        private readonly ICookieAuthenticationService _authenticationService;
 
-        public LoginModel(IMapper mapper, IAuthenticationService authenticationService)
+        public LoginModel(IMapper mapper, ICookieAuthenticationService authenticationService)
         {
             _mapper = mapper;
             _authenticationService = authenticationService;

@@ -12,6 +12,12 @@ namespace DataService.Mapper
         public UserMappingProfile()
         {
             CreateMap<User, UserCollectionItemDto>();
+            CreateMap<UserCreateDto, User>()
+                .ForMember(entity => entity.RoleId,
+                    opts => opts.MapFrom(dto => (int) dto.RoleId))
+                .ForMember(entity => entity.Role, opts => opts.Ignore());
+            //.ForMember(entity => entity.Progress, opts => opts.Ignore())
+            //.ForMember(entity => entity.ProgressId, opts => opts.Ignore());
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Common.Enums.User;
 
 namespace Common.DataContracts.User
 {
@@ -10,6 +11,6 @@ namespace Common.DataContracts.User
 
         public string Password { get; set; }
 
-        public int RoleId { get; set; }
+        public Role RoleId { get; set; }
     }
 }

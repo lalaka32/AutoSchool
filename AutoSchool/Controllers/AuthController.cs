@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
+﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using AutoMapper;
 using AutoSchool.Authorization;
+using AutoSchool.Models.User;
 using Common.BisnessObjects;
-using Common.Entities;
+using Common.DataContracts.User;
+using Common.Enums.User;
 using DataService.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 
@@ -19,48 +18,60 @@ namespace AutoSchool.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        IRegistrationService _registrationService;
+        private readonly IUserService _userService;
+        private readonly IJWTAuthenticationService _authenticationService;
+        private readonly IMapper _mapper;
 
-        public AuthController(IRegistrationService registrationService)
+        public AuthController(IUserService userService, IJWTAuthenticationService authenticationService, IMapper mapper)
         {
-            _registrationService = registrationService;
+            _userService = userService;
+            _authenticationService = authenticationService;
+            _mapper = mapper;
         }
 
         [AllowAnonymous]
         [HttpPost("[action]")]
-        public IActionResult Register([FromBody]User userToRegistry)
+        public IActionResult Register([FromBody]UserRegistryModel model)
         {
-            var withLoginExist = _registrationService.UserWithLoginExist(userToRegistry.Login);
+            var withLoginExist = _userService.Search(
+                new UserCollectionFilterDto { Login = model.Login })
+                .Count > 0;
 
             if (withLoginExist)
             {
                 const string LoginTakenErrorMessage = "Login is already taken";
                 return BadRequest(new { error = LoginTakenErrorMessage });
             }
-            _registrationService.AddUser(userToRegistry);
 
-            var tokenString = GenerateJSONWebToken(userToRegistry);
+            var createDto = _mapper.Map<UserCreateDto>(model);
+
+            createDto.RoleId = Role.Student;
+            
+            var userId = _userService.Create(createDto);
+            _authenticationService.Login(_mapper.Map<UserLoginDto>(model));
+
+            var tokenString = _authenticationService.GenerateJSONWebToken(userId);
 
             return Ok(new { token = tokenString });
         }
 
         [AllowAnonymous]
         [HttpPost("[action]")]
-        public IActionResult Login([FromBody]User loginUser)
+        public async Task<IActionResult> Login([FromBody]User loginUser)
         {
-            var user = _registrationService.GetUserByLogin(loginUser.Login);
-            if (user == null)
-            {
-                const string LoginNotCorrectErrorMessage = "No users with this login";
-                return Unauthorized(new { error = LoginNotCorrectErrorMessage });
-            }
-            if (user.Password != loginUser.Password)
-            {
-                const string PasswordErrorMessgae = "Wrong password";
-                return Unauthorized(new { error = PasswordErrorMessgae });
-            }
+            var userId = await _authenticationService.Login(_mapper.Map<UserLoginDto>(loginUser));
+//            if (user == null)
+//            {
+//                const string LoginNotCorrectErrorMessage = "No users with this login";
+//                return Unauthorized(new { error = LoginNotCorrectErrorMessage });
+//            }
+//            if (user.Password != loginUser.Password)
+//            {
+//                const string PasswordErrorMessgae = "Wrong password";
+//                return Unauthorized(new { error = PasswordErrorMessgae });
+//            }
 
-            var tokenString = GenerateJSONWebToken(user);
+            var tokenString = await _authenticationService.GenerateJSONWebToken(userId);
 
             return Ok(new { token = tokenString });
         }

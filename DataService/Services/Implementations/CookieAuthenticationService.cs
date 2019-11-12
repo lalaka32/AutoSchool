@@ -9,11 +9,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using IAuthenticationService = DataService.Services.Interfaces.IAuthenticationService;
+using ICookieAuthenticationService = DataService.Services.Interfaces.ICookieAuthenticationService;
 
 namespace DataService.Services.Implementations
 {
-    public class CookieAuthenticationService : IAuthenticationService
+    public class CookieAuthenticationService : ICookieAuthenticationService
     {
         private readonly IHttpContextAccessor _context;
         private readonly IUserService _userService;
@@ -38,7 +38,7 @@ namespace DataService.Services.Implementations
             {
                 throw new BadOperationException(ErrorCode.WrongPassword);
             }
-            await SignIn(user.Id, dto.Login);
+            await SetCookie(user.Id, dto.Login);
         }
 
         public async Task Logout()
@@ -47,13 +47,7 @@ namespace DataService.Services.Implementations
              CookieAuthenticationDefaults.AuthenticationScheme);
         }
 
-        public async Task SignUp(UserCreateDto dto)
-        {
-            var id = _userService.CreateAdmin(dto);
-            await SignIn(id, dto.Login);
-        }
-
-        private async Task SignIn(int id, string login)
+        private async Task SetCookie(int id, string login)
         {
             var claims = new List<Claim>
             {

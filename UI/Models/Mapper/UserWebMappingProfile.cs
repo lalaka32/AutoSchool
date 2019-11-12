@@ -13,7 +13,11 @@ namespace UI.Models.Mapper
         public UserWebMappingProfile()
         {
             CreateMap<UserLoginModel, UserLoginDto>();
-            CreateMap<UserRegistryModel, UserCreateDto>();
+
+            CreateMap<UserRegistryModel, UserCreateDto>()
+                .ForMember(dto => dto.RoleId, options => options.Ignore());
+
+            CreateMap<UserRegistryModel, UserLoginDto>();
         }
     }
 }
