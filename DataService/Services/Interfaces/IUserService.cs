@@ -5,8 +5,12 @@ namespace DataService.Services.Interfaces
 {
     public interface IUserService
 	{
-		int CreateAdmin(UserCreateDto dto);
-
+        int Create(UserCreateDto dto);
+        
+        UserDto Get(int id);
+        
+        //int CreateAdmin(UserCreateDto dto);
+        
         IReadOnlyCollection<UserCollectionItemDto> Search(UserCollectionFilterDto filter);
     }
 }

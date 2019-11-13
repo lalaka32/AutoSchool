@@ -1,9 +1,9 @@
-﻿using Common.BisnessObjects;
-using Common.DataContracts.DrivingTest;
+﻿using Common.DataContracts.DrivingTest;
 using DataAccess.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using Common.BusinessObjects;
 
 namespace DataAccess.Implementations
 {

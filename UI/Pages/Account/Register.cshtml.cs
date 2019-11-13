@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Common.DataContracts.User;
 using Common.Ecxeptions;
+using Common.Enums.User;
 using DataService.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -16,37 +17,43 @@ namespace UI.Pages.Account
     public class RegisterModel : PageModel
     {
         private readonly IMapper _mapper;
-        private readonly IAuthenticationService _authenticationService;
+        private readonly ICookieAuthenticationService _authenticationService;
+        private readonly IUserService _userService;
 
-        public RegisterModel(IMapper mapper, IAuthenticationService authenticationService)
+        public RegisterModel(IMapper mapper, ICookieAuthenticationService authenticationService,
+            IUserService userService)
         {
             _mapper = mapper;
             _authenticationService = authenticationService;
+            _userService = userService;
         }
 
-        [BindProperty]
-        public UserRegistryModel registryModel { get; set; }
+        [BindProperty] public UserRegistryModel registryModel { get; set; }
 
         public void OnGet()
         {
-           
         }
 
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPost()
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
+
             if (registryModel.Password != registryModel.ConfirmPassword)
             {
-                ModelState.AddModelError<RegisterModel>(x => x.registryModel.ConfirmPassword, "Please confirm password");
+                ModelState.AddModelError<RegisterModel>(x => x.registryModel.ConfirmPassword,
+                    "Please confirm password");
                 return Page();
             }
-            var userLoginDto = _mapper.Map<UserCreateDto>(registryModel);
+
+            var userCreateDto = _mapper.Map<UserCreateDto>(registryModel);
+            userCreateDto.RoleId = Role.Administrator;
             try
             {
-                _authenticationService.SignUp(userLoginDto);
+                _userService.Create(userCreateDto);
+                await _authenticationService.Login(_mapper.Map<UserLoginDto>(registryModel));
             }
             catch (BadOperationException e)
             {
@@ -54,8 +61,10 @@ namespace UI.Pages.Account
                 {
                     ModelState.AddModelError<RegisterModel>(x => x.registryModel.Login, "Login occupied");
                 }
+
                 return Page();
             }
+
             return RedirectToPage("../Index");
         }
     }

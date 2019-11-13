@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using AutoSchool.Authorization;
-using Common.BisnessObjects;
-using Common.Entities;
+﻿using System.Threading.Tasks;
+using AutoMapper;
+using AutoSchool.Models.User;
+using Common.DataContracts.User;
+using Common.Ecxeptions;
+using Common.Enums.User;
 using DataService.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
 
 namespace AutoSchool.Controllers
 {
@@ -19,67 +14,72 @@ namespace AutoSchool.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        IRegistrationService _registrationService;
+        private readonly IUserService _userService;
+        private readonly IJwtAuthenticationService _authenticationService;
+        private readonly IMapper _mapper;
 
-        public AuthController(IRegistrationService registrationService)
+        public AuthController(IUserService userService, IJwtAuthenticationService authenticationService, IMapper mapper)
         {
-            _registrationService = registrationService;
+            _userService = userService;
+            _authenticationService = authenticationService;
+            _mapper = mapper;
         }
 
         [AllowAnonymous]
         [HttpPost("[action]")]
-        public IActionResult Register([FromBody]User userToRegistry)
+        public IActionResult Register([FromBody] UserRegistryModel model)
         {
-            var withLoginExist = _registrationService.UserWithLoginExist(userToRegistry.Login);
+            var createDto = _mapper.Map<UserCreateDto>(model);
 
-            if (withLoginExist)
+            createDto.RoleId = Role.Student;
+
+            try
             {
-                const string LoginTakenErrorMessage = "Login is already taken";
-                return BadRequest(new { error = LoginTakenErrorMessage });
+                _userService.Create(createDto);
             }
-            _registrationService.AddUser(userToRegistry);
+            catch (BadOperationException e)
+            {
+                if (e.Code == ErrorCode.LoginOccupied)
+                {
+                    const string loginTakenErrorMessage = "Login is already taken";
+                    return BadRequest(new {error = loginTakenErrorMessage});
+                }
+            }
 
-            var tokenString = GenerateJSONWebToken(userToRegistry);
+            var userId = _authenticationService.Login(_mapper.Map<UserLoginDto>(model));
 
-            return Ok(new { token = tokenString });
+            var tokenString = _authenticationService.GenerateJsonWebToken(userId);
+
+            return Ok(new {token = tokenString});
         }
 
         [AllowAnonymous]
         [HttpPost("[action]")]
-        public IActionResult Login([FromBody]User loginUser)
+        public IActionResult Login([FromBody] UserLoginModel loginUser)
         {
-            var user = _registrationService.GetUserByLogin(loginUser.Login);
-            if (user == null)
+            var userId = 0;
+            try
             {
-                const string LoginNotCorrectErrorMessage = "No users with this login";
-                return Unauthorized(new { error = LoginNotCorrectErrorMessage });
+                userId = _authenticationService.Login(_mapper.Map<UserLoginDto>(loginUser));
             }
-            if (user.Password != loginUser.Password)
+            catch (BadOperationException e)
             {
-                const string PasswordErrorMessgae = "Wrong password";
-                return Unauthorized(new { error = PasswordErrorMessgae });
+                if (e.Code == ErrorCode.WrongLogin)
+                {
+                    const string loginNotCorrectErrorMessage = "No users with this login";
+                    return Unauthorized(new {error = loginNotCorrectErrorMessage});
+                }
+
+                if (e.Code == ErrorCode.WrongPassword)
+                {
+                    const string passwordErrorMessage = "Wrong password";
+                    return Unauthorized(new {error = passwordErrorMessage});
+                }
             }
 
-            var tokenString = GenerateJSONWebToken(user);
+            var tokenString = _authenticationService.GenerateJsonWebToken(userId);
 
-            return Ok(new { token = tokenString });
-        }
-
-        public string GenerateJSONWebToken(User userInfo)
-        {
-            var securityKey = AuthOptions.GetSymmetricSecurityKey();
-            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-
-            var claims = new[] {
-                        new Claim(JwtRegisteredClaimNames.Sub, userInfo.Login),
-                        new Claim(JwtRegisteredClaimNames.Jti, userInfo.Id.ToString())};
-
-            var token = new JwtSecurityToken(AuthOptions.ISSUER,
-            AuthOptions.AUDIENCE,
-            claims,
-            signingCredentials: credentials);
-
-            return new JwtSecurityTokenHandler().WriteToken(token);
+            return Ok(new {token = tokenString});
         }
     }
 }
