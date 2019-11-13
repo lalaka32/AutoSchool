@@ -1,9 +1,9 @@
-﻿using Common.BisnessObjects;
-using Common.Entities;
+﻿using Common.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Common.BusinessObjects;
 
 namespace DataAccess
 {

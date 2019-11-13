@@ -32,12 +32,12 @@ namespace UI.Pages.User
 
         }
 
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPost()
         {
             var userLoginDto = _mapper.Map<UserLoginDto>(loginModel);
             try
             {
-                _authenticationService.Login(userLoginDto);
+                await _authenticationService.Login(userLoginDto);
             }
             catch (BadOperationException e)
             {

@@ -27,6 +27,11 @@ namespace Common.Ecxeptions
             return !(code1 == code2);
         }
 
+        public bool Equals(ErrorCode other)
+        {
+            return string.Equals(Value, other.Value);
+        }
+        
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;

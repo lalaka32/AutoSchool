@@ -1,5 +1,4 @@
-﻿using Common.BisnessObjects;
-using Common.DataContracts.DrivingTest;
+﻿using Common.DataContracts.DrivingTest;
 using Common.DataContracts.User;
 using DataAccess.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -8,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using AutoMapper;
+using Common.BusinessObjects;
 
 namespace DataAccess.Implementations
 {
@@ -37,6 +37,13 @@ namespace DataAccess.Implementations
                 .AsNoTracking()
                 .ToList()
                 .AsReadOnly();
+        }
+
+        public User Get(int id)
+        {
+            return _context.Users
+                .AsNoTracking()
+                .FirstOrDefault(u => u.Id == id);
         }
     }
 }

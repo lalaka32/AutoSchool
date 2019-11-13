@@ -1,11 +1,8 @@
 using AutoMapper;
-using AutoSchool.Authorization;
 using AutoSchool.Models.Mapper;
 using Common.MiddleWare.Extentions;
 using DataAccess;
 using DataService.Mapper;
-using DataService.Services.Implementations;
-using DataService.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -16,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json.Serialization;
+using Common.Authorization;	
 
 namespace AutoSchool
 {

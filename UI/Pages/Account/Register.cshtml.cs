@@ -34,7 +34,7 @@ namespace UI.Pages.Account
         {
         }
 
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPost()
         {
             if (!ModelState.IsValid)
             {
@@ -53,7 +53,7 @@ namespace UI.Pages.Account
             try
             {
                 _userService.Create(userCreateDto);
-                _authenticationService.Login(_mapper.Map<UserLoginDto>(registryModel));
+                await _authenticationService.Login(_mapper.Map<UserLoginDto>(registryModel));
             }
             catch (BadOperationException e)
             {

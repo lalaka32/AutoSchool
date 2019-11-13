@@ -33,6 +33,12 @@ namespace DataService.Services.Implementations
             return _userRepository.Create(dto);
         }
 
+        public UserDto Get(int id)
+        {
+            var user = _userRepository.Get(id);
+            return _mapper.Map<UserDto>(user);
+        }
+
         public IReadOnlyCollection<UserCollectionItemDto> Search(UserCollectionFilterDto filter)
         {
             var result = _userRepository.Search(filter);

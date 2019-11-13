@@ -1,9 +1,6 @@
 ﻿using Common.Entities;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Common.BisnessObjects
+namespace Common.BusinessObjects
 {
 	public class User
 	{
@@ -18,7 +15,7 @@ namespace Common.BisnessObjects
 		public string Password { get; set; }
 
        // public int ProgressId { get; set; }
-
+       
        // public Progress Progress { get; set; }
     }
 }

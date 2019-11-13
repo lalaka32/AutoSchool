@@ -1,9 +1,8 @@
-﻿using Common.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using Common.Entities;
 
-namespace Common.BisnessObjects
+namespace Common.BusinessObjects
 {
 	public class DrivingTest
 	{
