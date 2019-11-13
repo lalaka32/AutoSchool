@@ -18,8 +18,8 @@ import { HomeComponent } from './home/home.component';
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
-    RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
+      RouterModule.forRoot([
+          { path: '', component: AppComponent, pathMatch: 'full' },
     ])
   ],
   providers: [],

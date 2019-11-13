@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Common.BisnessObjects;
+using Common.DataContracts.DrivingTest;
 using Common.Entities;
 using DataService.Services.Implementations;
 using DataService.Services.Interfaces;
@@ -15,11 +16,11 @@ namespace AutoSchool.Controllers
     [ApiController]
     public class TestResultController : ControllerBase
     {
-		readonly DrivingTestService testResultStoreService;
+		readonly IDrivingTestService _drivingTestService;
 
-		public TestResultController(DrivingTestService testResultStoreService)
+        public TestResultController(IDrivingTestService testResultStoreService)
 		{
-			this.testResultStoreService = testResultStoreService;
+            _drivingTestService = testResultStoreService;
 		}
 
 		[HttpPost("[action]")]
@@ -29,5 +30,15 @@ namespace AutoSchool.Controllers
 			//userStoreService.AddUser(user);
 			return Ok();
 		}
+
+        [HttpGet("[action]")]
+        public IEnumerable<DrivingTestCollectionItemDto> GetAllByUser()
+        {
+            var dtos = _drivingTestService.GetUserHistory(new DrivingTestCollectionFilterDto
+            {
+                UserId = 4
+            });
+            return dtos;
+        }
     }
 }

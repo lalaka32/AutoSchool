@@ -31,6 +31,8 @@ namespace DataAccess
 
 		public DbSet<EmployeeLecturer> EmployeeLecturers { get; set; }
 
+		public DbSet<Progress> Progresses { get; set; }
+
 		public AutoSchoolContext(DbContextOptions<AutoSchoolContext> options) : base(options)
 		{
 			Database.EnsureCreated();
