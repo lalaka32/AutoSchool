@@ -31,7 +31,7 @@ namespace AutoSchool.Controllers
         [HttpGet("[action]")]
         public IActionResult Get()
         {
-            userStoreService.AddUser(new User());
+           // userStoreService.AddUser(new User());
             return Ok();
         }
     }
