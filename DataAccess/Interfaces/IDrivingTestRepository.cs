@@ -1,8 +1,8 @@
-﻿using Common.BisnessObjects;
-using Common.DataContracts.DrivingTest;
+﻿using Common.DataContracts.DrivingTest;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Common.BusinessObjects;
 
 namespace DataAccess.Interfaces
 {

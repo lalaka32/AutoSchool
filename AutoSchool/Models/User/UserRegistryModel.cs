@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace UI.Models.User
+namespace AutoSchool.Models.User
 {
     public class UserRegistryModel
     {
@@ -14,7 +10,6 @@ namespace UI.Models.User
         [Required]
         public string Password { get; set; }
 
-        [Required]
         public string ConfirmPassword { get; set; }
     }
 }

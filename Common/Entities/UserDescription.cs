@@ -1,5 +1,5 @@
-﻿using Common.BisnessObjects;
-using System;
+﻿using System;
+using Common.BusinessObjects;
 
 namespace Common.Entities
 {

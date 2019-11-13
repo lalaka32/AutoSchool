@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace DataService.Services.Interfaces
 {
-    public interface IAuthenticationService
+    public interface IJwtAuthenticationService
     {
-        Task SignUp(UserCreateDto dto);
-
-        Task Login(UserLoginDto dto);
+        int Login(UserLoginDto dto);
 
         Task Logout();
+
+        string GenerateJsonWebToken(int userId);
     }
 }
