@@ -32,6 +32,8 @@
     <Content Include="ClientApp\src\app\login\login.component.ts" />
     <Content Include="ClientApp\src\app\registration\registration.component.html" />
     <Content Include="ClientApp\src\app\registration\registration.component.ts" />
+    <Content Include="ClientApp\src\app\user-history\user-history.component.html" />
+    <Content Include="ClientApp\src\app\user-history\user-history.component.ts" />
     <None Remove="$(SpaRoot)**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
   </ItemGroup>
