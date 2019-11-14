@@ -1,11 +1,11 @@
 <h1>Список тестов</h1>
 <table class="table table-striped">
   <thead>
-    <tr>Пользователь: </tr>
+    <tr>User: </tr>
     <tr>
-      <td>Добавлен</td>
-      <td>Изменен</td>
-      <td>Успех</td>
+      <td>Added</td>
+      <td>Updated</td>
+      <td>Success</td>
       <td></td>
     </tr>
   </thead>
@@ -23,7 +23,7 @@
     <div *ngIf="p?.success; then set else unset"></div>
     <ng-template #set>
       <div class="col-sm"> <!--spacer--> </div>
-      <!-- timeline item center dot Успех -->
+      <!-- timeline item center dot Success -->
       <div class="col-sm-1 text-center flex-column d-none d-sm-flex">
         <div class="row h-50">
           <div class="col">&nbsp;</div>
@@ -38,13 +38,13 @@
         </div>
       </div>
 
-      <!-- timeline item event content Успех-->
+      <!-- timeline item event content Success-->
       <div class="col-sm py-2">
         <div class="card border-success shadow">
           <div class="card-body">
             <div class="float-right text-muted small">{{p?.updatedAt | date:'medium'}}</div>
-            <h4 class="card-title text-success">Тест {{i+1}}</h4>
-            <p class="card-text">Успех</p>
+            <h4 class="card-title text-success">Test {{i+1}}</h4>
+            <p class="card-text">Succeeded</p>
           </div>
         </div>
       </div>
@@ -55,8 +55,8 @@
         <div class="card">
           <div class="card-body">
             <div class="float-right text-muted small">{{p?.updatedAt | date:'medium'}}</div>
-            <h4 class="card-title text-danger" *ngIf="!p?.success">Тест {{i+1}}</h4>
-            <p class="card-text">Провал</p>
+            <h4 class="card-title text-danger" *ngIf="!p?.success">Test {{i+1}}</h4>
+            <p class="card-text">Failured</p>
             <button class="btn btn-sm btn-outline-secondary" type="button" [attr.data-target]="'#tdetails_' + index" data-toggle="collapse">Show Details ▼</button>
             <div class="collapse border" [attr.id]="'tdetails_' + index">
               <div class="p-2 text-monospace">
