@@ -14,6 +14,7 @@ import {AuthenticationService} from "./shared/services/AuthService";
 import {ErrorInterceptor} from "./shared/interceptors/errorInterceptor";
 import {httpInterceptor} from "./shared/interceptors/httpInterceptor";
 import {RegistrationComponent} from "./registration/registration.component";
+import {UserHistoryComponent} from "./user-history/user-history.component";
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import {RegistrationComponent} from "./registration/registration.component";
     NavMenuComponent,
     HomeComponent,
     LoginComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    UserHistoryComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -29,7 +31,7 @@ import {RegistrationComponent} from "./registration/registration.component";
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot([
-      { path: '', component: AppComponent, pathMatch: 'full', canActivate: [AuthorizationCheck]},
+      { path: '', component: UserHistoryComponent, pathMatch: 'full', canActivate: [AuthorizationCheck]},
       { path: 'login', component: LoginComponent, pathMatch: 'full' },
       { path: 'registration', component: RegistrationComponent, pathMatch: 'full' }
     ])
