@@ -9,6 +9,7 @@ namespace Common.Ecxeptions
         public static readonly ErrorCode LoginOccupied = new ErrorCode("LOGIN_OCCUPIED");
         public static readonly ErrorCode WrongLogin = new ErrorCode("WRONG_LOGIN");
         public static readonly ErrorCode WrongPassword = new ErrorCode("WRONG_PASSWORD");
+        public static readonly ErrorCode NotFound = new ErrorCode("NOT_FOUND");
 
         public string Value { get; }
 
