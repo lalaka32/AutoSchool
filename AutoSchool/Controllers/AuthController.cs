@@ -33,18 +33,7 @@ namespace AutoSchool.Controllers
 
             createDto.RoleId = Role.Student;
 
-            try
-            {
-                _userService.Create(createDto);
-            }
-            catch (BadOperationException e)
-            {
-                if (e.Code == ErrorCode.LoginOccupied)
-                {
-                    const string loginTakenErrorMessage = "Login is already taken";
-                    return BadRequest(new {error = loginTakenErrorMessage});
-                }
-            }
+            _userService.Create(createDto);
 
             var userId = _authenticationService.Login(_mapper.Map<UserLoginDto>(model));
 
@@ -57,25 +46,7 @@ namespace AutoSchool.Controllers
         [HttpPost("[action]")]
         public IActionResult Login([FromBody] UserLoginModel loginUser)
         {
-            var userId = 0;
-            try
-            {
-                userId = _authenticationService.Login(_mapper.Map<UserLoginDto>(loginUser));
-            }
-            catch (BadOperationException e)
-            {
-                if (e.Code == ErrorCode.WrongLogin)
-                {
-                    const string loginNotCorrectErrorMessage = "No users with this login";
-                    return Unauthorized(new {error = loginNotCorrectErrorMessage});
-                }
-
-                if (e.Code == ErrorCode.WrongPassword)
-                {
-                    const string passwordErrorMessage = "Wrong password";
-                    return Unauthorized(new {error = passwordErrorMessage});
-                }
-            }
+            var userId = _authenticationService.Login(_mapper.Map<UserLoginDto>(loginUser));
 
             var tokenString = _authenticationService.GenerateJsonWebToken(userId);
 
