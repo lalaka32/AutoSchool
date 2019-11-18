@@ -13,7 +13,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json.Serialization;
-using Common.Authorization;	
+using Common.Authorization;
+using Middleware.MiddleWare;
 
 namespace AutoSchool
 {
@@ -85,6 +86,8 @@ namespace AutoSchool
 			}
 
             app.UseAuthentication();
+            
+            app.UseMiddleware<HandleExceptionMiddleware>();
 
             app.UseHttpsRedirection();
 			app.UseStaticFiles();

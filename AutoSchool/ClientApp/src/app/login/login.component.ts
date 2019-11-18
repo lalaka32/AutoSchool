@@ -16,6 +16,11 @@ export class LoginComponent implements OnInit {
   returnUrl: string;
   error ='';
 
+  errorMessages = {
+    WRONG_LOGIN : 'No users with this login',
+    WRONG_PASSWORD : 'Wrong password'
+  };
+
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -51,7 +56,7 @@ export class LoginComponent implements OnInit {
           this.router.navigate([this.returnUrl]);
         },
         error => {
-          this.error = error.error.error;
+          this.error = this.errorMessages[error.error.code];
           this.submitClick = false;
         });
   }

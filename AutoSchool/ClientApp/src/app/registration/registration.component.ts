@@ -16,6 +16,10 @@ export class RegistrationComponent implements OnInit {
   returnUrl: string;
   error ='';
 
+  errorMessages = {
+    LOGIN_OCCUPIED : 'Login is already taken'
+  };
+
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -50,7 +54,8 @@ export class RegistrationComponent implements OnInit {
           this.router.navigate([this.returnUrl]);
         },
         error => {
-          this.error = error.error.error;
+          console.log(error);
+          this.error = this.errorMessages[error.error.code];
           this.submitClick = false;
         });
   }
