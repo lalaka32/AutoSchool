@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using Common.BusinessObjects;
+using Common.Entities;
 
 namespace DataAccess.Implementations
 {
@@ -26,6 +27,13 @@ namespace DataAccess.Implementations
                 .AsNoTracking()
                 .ToList();
             return result.AsReadOnly();
+        }
+
+        public int Create(DrivingTest entity)
+        {
+            _context.DrivingTests.Add(entity);
+            _context.SaveChanges();
+            return entity.Id;
         }
     }
 }

@@ -7,20 +7,23 @@ using DataService.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Common.BusinessObjects;
+using Common.Enums;
 
 namespace DataService.Services.Implementations
 {
-	public class DrivingTestService : IDrivingTestService
-	{
-		private readonly IDrivingTestRepository _drivingTestRepository;
+    public class DrivingTestService : IDrivingTestService
+    {
+        private readonly IDrivingTestRepository _drivingTestRepository;
         private readonly IMapper _mapper;
+        private readonly IUserService _userService;
 
 
-        public DrivingTestService(IDrivingTestRepository drivingTestRepository, IMapper mapper)
-		{
+        public DrivingTestService(IDrivingTestRepository drivingTestRepository, IMapper mapper, IUserService userService)
+        {
             _drivingTestRepository = drivingTestRepository;
             _mapper = mapper;
-
+            _userService = userService;
         }
 
         public IReadOnlyCollection<DrivingTestCollectionItemDto> GetUserHistory(DrivingTestCollectionFilterDto filter)
@@ -28,6 +31,21 @@ namespace DataService.Services.Implementations
             var result = _drivingTestRepository.Find(filter);
             var mappedResult = _mapper.Map<IReadOnlyCollection<DrivingTestCollectionItemDto>>(result);
             return mappedResult;
+        }
+
+        public int CreateCrossTest(DrivingTestCreateDto dto)
+        {
+            var currentUser = _userService.GetCurrentUser();
+            var entity = _mapper.Map<DrivingTest>(dto);
+            entity.UserId = currentUser.Id;
+            entity.AddedAt = DateTime.Now;
+            entity.UpdatedAt = DateTime.Now;
+            entity.RulesSection = new RulesSection()
+            {
+                Id = RuleSection.Cross
+            };
+            var id = _drivingTestRepository.Create(entity);
+            return id;
         }
     }
 }

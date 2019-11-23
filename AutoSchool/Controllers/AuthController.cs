@@ -51,6 +51,6 @@ namespace AutoSchool.Controllers
             var tokenString = _authenticationService.GenerateJsonWebToken(userId);
 
             return Ok(new {token = tokenString});
-        }
+    }
     }
 }

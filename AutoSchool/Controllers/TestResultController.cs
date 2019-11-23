@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using AutoSchool.Models;
 using Common.DataContracts.DrivingTest;
 using Common.BusinessObjects;
 using Common.Entities;
@@ -17,17 +19,18 @@ namespace AutoSchool.Controllers
     public class TestResultController : ControllerBase
     {
 		readonly IDrivingTestService _drivingTestService;
+		readonly IMapper _mapper;
 
-        public TestResultController(IDrivingTestService testResultStoreService)
+        public TestResultController(IDrivingTestService testResultStoreService, IMapper mapper)
 		{
             _drivingTestService = testResultStoreService;
+            _mapper = mapper;
 		}
 
 		[HttpPost("[action]")]
-		public IActionResult Post([FromBody]DrivingTest testResult)
+		public IActionResult Post([FromBody]DrivingTestCreateModel testResult)
 		{
-			//testResultStoreService.AddTestResult(testResult);
-			//userStoreService.AddUser(user);
+			_drivingTestService.CreateCrossTest(_mapper.Map<DrivingTestCreateDto>(testResult));
 			return Ok();
 		}
 

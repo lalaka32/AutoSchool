@@ -8,6 +8,8 @@ namespace DataService.Services.Interfaces
         int Create(UserCreateDto dto);
         
         UserDto Get(int id);
+
+        UserDto GetCurrentUser();
         
         //int CreateAdmin(UserCreateDto dto);
         
