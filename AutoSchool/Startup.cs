@@ -14,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json.Serialization;
 using Common.Authorization;
+using Microsoft.AspNetCore.Http;
 using Middleware.MiddleWare;
 
 namespace AutoSchool
@@ -43,6 +44,7 @@ namespace AutoSchool
 
                         ValidateAudience = true,
                         ValidAudience = AuthOptions.AUDIENCE,
+                        ValidateLifetime = false,
 
                         IssuerSigningKey = AuthOptions.GetSymmetricSecurityKey(),
                         ValidateIssuerSigningKey = true,
@@ -60,6 +62,8 @@ namespace AutoSchool
             services.AddAutoMapper(
              typeof(DrivingTestMappingProfile).Assembly, // data service mapping profiles
              typeof(DrivingTestWebMappingProfile).Assembly); // bisness logic mapping profiles
+             
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddBusinessLogic();
 

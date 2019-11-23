@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoSchool.Models.User;
+using Common.DataContracts.DrivingTest;
 using Common.DataContracts.User;
 
 namespace AutoSchool.Models.Mapper
@@ -18,6 +19,10 @@ namespace AutoSchool.Models.Mapper
                 .ForMember(dto => dto.RoleId, options => options.Ignore());
 
             CreateMap<UserRegistryModel, UserLoginDto>();
+
+            CreateMap<DrivingTestCreateModel, DrivingTestCreateDto>();
+            
+            CreateMap<RoadSituationCreateModel, RoadSituationCreateDto>();
         }
     }
 }
