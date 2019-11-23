@@ -15,9 +15,7 @@ namespace DataAccess
 
 		public DbSet<DrivingTest> DrivingTests { get; set; }
 
-		public DbSet<TestRules> TestRules { get; set; }
-
-		public DbSet<RulesSection> RulesSections { get; set; }
+		public DbSet<RuleSection> RulesSections { get; set; }
 		
 		public DbSet<AutoClassGroupe> AutoClassGroupes { get; set; }
 

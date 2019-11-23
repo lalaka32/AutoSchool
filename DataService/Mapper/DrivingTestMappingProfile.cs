@@ -20,7 +20,7 @@ namespace DataService.Mapper
                 .ForMember(entity => entity.UserId, opts => opts.Ignore())
                 .ForMember(entity => entity.AddedAt, opts => opts.Ignore())
                 .ForMember(entity => entity.UpdatedAt, opts => opts.Ignore())
-                .ForMember(entity => entity.RulesSection, opts => opts.Ignore());
+                .ForMember(entity => entity.RuleSection, opts => opts.Ignore());
             
             CreateMap<RoadSituationCreateDto, RoadSituation>()
                 .ForMember(entity => entity.Id, opts => opts.Ignore())

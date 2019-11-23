@@ -12,9 +12,9 @@ namespace Common.BusinessObjects
 
         public User User { get; set; }
 
-        public int RulesSectionId { get; set; }
+        public int RuleSectionId { get; set; }
         
-        public RulesSection RulesSection { get; set; }
+        public RuleSection RuleSection { get; set; }
 
         public ICollection<RoadSituation> RoadSituation { get; set; }
 
