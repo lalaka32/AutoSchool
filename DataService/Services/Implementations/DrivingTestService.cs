@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Text;
 using Common.BusinessObjects;
 using Common.Enums;
+using RuleSection = Common.Entities.RuleSection;
 
 namespace DataService.Services.Implementations
 {
@@ -40,9 +41,9 @@ namespace DataService.Services.Implementations
             entity.UserId = currentUser.Id;
             entity.AddedAt = DateTime.Now;
             entity.UpdatedAt = DateTime.Now;
-            entity.RulesSection = new RulesSection()
+            entity.RuleSection = new RuleSection()
             {
-                Id = RuleSection.Cross
+                Id = (int) Common.Enums.RuleSection.Cross
             };
             var id = _drivingTestRepository.Create(entity);
             return id;

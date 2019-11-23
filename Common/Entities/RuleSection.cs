@@ -5,9 +5,9 @@ using Common.Enums;
 
 namespace Common.Entities
 {
-	public class RulesSection
+	public class RuleSection
 	{
-		public RuleSection Id { get; set; }
+		public int Id { get; set; }
 
 		public string Name { get; set; }
 	}
