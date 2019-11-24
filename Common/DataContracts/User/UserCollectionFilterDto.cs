@@ -8,5 +8,7 @@ namespace Common.DataContracts.User
     public class UserCollectionFilterDto : CollectionFilterDto
     {
         public string Login { get; set; }
+
+        public IEnumerable<int> ExcludeRoles { get; set; }
     }
 }

@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.Serialization;
 
-namespace Middleware.Authorization
+namespace Common.Authorization
 {
     [Serializable]
     public class ForbiddenException : Exception

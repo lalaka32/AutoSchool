@@ -13,5 +13,7 @@ namespace Common.DataContracts.User
         public string Password { get; set; }
 
         public int RoleId { get; set; }
+        
+        public string RoleName { get; set; }
     }
 }

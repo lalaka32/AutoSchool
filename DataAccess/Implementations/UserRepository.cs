@@ -33,7 +33,9 @@ namespace DataAccess.Implementations
         public IReadOnlyCollection<User> Search(UserCollectionFilterDto filter)
         {
             return _context.Users
-                .Where(u => (filter.Login == null || u.Login == filter.Login))
+                .Include(u => u.Role)
+                .Where(u => filter.Login == null || u.Login == filter.Login)
+                .Where(u => filter.ExcludeRoles == null || !filter.ExcludeRoles.Contains(u.RoleId))
                 .AsNoTracking()
                 .ToList()
                 .AsReadOnly();
@@ -42,6 +44,7 @@ namespace DataAccess.Implementations
         public User Get(int id)
         {
             return _context.Users
+                .Include(u => u.Role)
                 .AsNoTracking()
                 .FirstOrDefault(u => u.Id == id);
         }

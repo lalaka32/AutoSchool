@@ -18,28 +18,31 @@ namespace AutoSchool.Controllers
     [ApiController]
     public class TestResultController : ControllerBase
     {
-		readonly IDrivingTestService _drivingTestService;
-		readonly IMapper _mapper;
+        readonly IDrivingTestService _drivingTestService;
+        readonly IMapper _mapper;
+        readonly IAuthenticationService _authenticationService;
 
-        public TestResultController(IDrivingTestService testResultStoreService, IMapper mapper)
-		{
+        public TestResultController(IDrivingTestService testResultStoreService, IMapper mapper,
+            IAuthenticationService authenticationService)
+        {
             _drivingTestService = testResultStoreService;
             _mapper = mapper;
-		}
+            _authenticationService = authenticationService;
+        }
 
-		[HttpPost("[action]")]
-		public IActionResult Post([FromBody]DrivingTestCreateModel testResult)
-		{
-			_drivingTestService.CreateCrossTest(_mapper.Map<DrivingTestCreateDto>(testResult));
-			return Ok();
-		}
+        [HttpPost("[action]")]
+        public IActionResult Post([FromBody] DrivingTestCreateModel testResult)
+        {
+            _drivingTestService.CreateCrossTest(_mapper.Map<DrivingTestCreateDto>(testResult));
+            return Ok();
+        }
 
         [HttpGet("[action]")]
         public IEnumerable<DrivingTestCollectionItemDto> GetAllByUser()
         {
             var dtos = _drivingTestService.GetUserHistory(new DrivingTestCollectionFilterDto
             {
-                UserId = 4
+                UserId = _authenticationService.GetCurrentUserId()
             });
             return dtos;
         }

@@ -14,24 +14,26 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json.Serialization;
 using Common.Authorization;
+using DataService.Services.Implementations;
+using DataService.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Middleware.MiddleWare;
 
 namespace AutoSchool
 {
     public class Startup
-	{
-		public Startup(IConfiguration configuration)
-		{
-			Configuration = configuration;
-		}
+    {
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
 
-		public IConfiguration Configuration { get; }
+        public IConfiguration Configuration { get; }
 
-		public void ConfigureServices(IServiceCollection services)
-		{
-			string connectionString = Configuration.GetConnectionString("DefaultConnection");
-			services.AddDbContext<AutoSchoolContext>(options => options.UseSqlServer(connectionString));
+        public void ConfigureServices(IServiceCollection services)
+        {
+            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+            services.AddDbContext<AutoSchoolContext>(options => options.UseSqlServer(connectionString));
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
@@ -60,10 +62,11 @@ namespace AutoSchool
             );
 
             services.AddAutoMapper(
-             typeof(DrivingTestMappingProfile).Assembly, // data service mapping profiles
-             typeof(DrivingTestWebMappingProfile).Assembly); // bisness logic mapping profiles
-             
+                typeof(DrivingTestMappingProfile).Assembly, // data service mapping profiles
+                typeof(DrivingTestWebMappingProfile).Assembly); // bisness logic mapping profiles
+
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped<IAuthenticationService, ApiAuthenticationService>();
 
             services.AddBusinessLogic();
 
@@ -71,49 +74,45 @@ namespace AutoSchool
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-			services.AddSpaStaticFiles(configuration =>
-			{
-				configuration.RootPath = "ClientApp/dist";
-			});
-		}
+            services.AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp/dist"; });
+        }
 
-		public void Configure(IApplicationBuilder app, IHostingEnvironment env)
-		{
-			if (env.IsDevelopment())
-			{
-				app.UseDeveloperExceptionPage();
-			}
-			else
-			{
-				app.UseExceptionHandler("/Error");
-				app.UseHsts();
-			}
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        {
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                app.UseExceptionHandler("/Error");
+                app.UseHsts();
+            }
 
             app.UseAuthentication();
-            
+
             app.UseMiddleware<HandleExceptionMiddleware>();
 
             app.UseHttpsRedirection();
-			app.UseStaticFiles();
-			app.UseSpaStaticFiles();
+            app.UseStaticFiles();
+            app.UseSpaStaticFiles();
 
-			app.UseMvc(routes =>
-			{
-				routes.MapRoute(
-					name: "default",
-					template: "{controller}/{action=Index}/{id?}");
-			});
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller}/{action=Index}/{id?}");
+            });
 
-			app.UseSpa(spa =>
-			{
+            app.UseSpa(spa =>
+            {
+                spa.Options.SourcePath = "ClientApp";
 
-				spa.Options.SourcePath = "ClientApp";
-
-				if (env.IsDevelopment())
-				{
-					spa.UseAngularCliServer(npmScript: "start");
-				}
-			});
-		}
-	}
+                if (env.IsDevelopment())
+                {
+                    spa.UseAngularCliServer(npmScript: "start");
+                }
+            });
+        }
+    }
 }

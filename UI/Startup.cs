@@ -10,6 +10,8 @@ using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using DataAccess;
 using Common.MiddleWare.Extentions;
+using DataService.Services.Implementations;
+using DataService.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace UI
@@ -45,11 +47,11 @@ namespace UI
             services.AddDataAccess();
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-             .AddCookie();
+                .AddCookie();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-            //services.AddTransient<IAuthenticationService, CookieAuthenticationService>();
+            services.AddTransient<IAuthenticationService, AdminAuthenticationService>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }

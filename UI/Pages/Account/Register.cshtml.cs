@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Common.Authorization;
 using Common.DataContracts.User;
 using Common.Ecxeptions;
 using Common.Enums.User;
@@ -17,10 +18,10 @@ namespace UI.Pages.Account
     public class RegisterModel : PageModel
     {
         private readonly IMapper _mapper;
-        private readonly ICookieAuthenticationService _authenticationService;
+        private readonly IAuthenticationService _authenticationService;
         private readonly IUserService _userService;
 
-        public RegisterModel(IMapper mapper, ICookieAuthenticationService authenticationService,
+        public RegisterModel(IMapper mapper, IAuthenticationService authenticationService,
             IUserService userService)
         {
             _mapper = mapper;
@@ -62,6 +63,11 @@ namespace UI.Pages.Account
                     ModelState.AddModelError<RegisterModel>(x => x.registryModel.Login, "Login occupied");
                 }
 
+                return Page();
+            }
+            catch (ForbiddenException e)
+            {
+                ModelState.AddModelError<RegisterModel>(x => x.registryModel.Login, "This user have no access to this site");
                 return Page();
             }
 

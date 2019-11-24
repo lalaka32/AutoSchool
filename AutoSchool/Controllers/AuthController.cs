@@ -15,19 +15,22 @@ namespace AutoSchool.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IUserService _userService;
-        private readonly IJwtAuthenticationService _authenticationService;
+        private readonly IJwtAuthenticationService _jwtAuthenticationService;
+        private readonly IAuthenticationService _authenticationService;
         private readonly IMapper _mapper;
 
-        public AuthController(IUserService userService, IJwtAuthenticationService authenticationService, IMapper mapper)
+        public AuthController(IUserService userService, IJwtAuthenticationService jwtAuthenticationService,
+            IAuthenticationService authenticationService, IMapper mapper)
         {
             _userService = userService;
             _authenticationService = authenticationService;
+            _jwtAuthenticationService = jwtAuthenticationService;
             _mapper = mapper;
         }
 
         [AllowAnonymous]
         [HttpPost("[action]")]
-        public IActionResult Register([FromBody] UserRegistryModel model)
+        public async Task<IActionResult> Register([FromBody] UserRegistryModel model)
         {
             var createDto = _mapper.Map<UserCreateDto>(model);
 
@@ -35,22 +38,22 @@ namespace AutoSchool.Controllers
 
             _userService.Create(createDto);
 
-            var userId = _authenticationService.Login(_mapper.Map<UserLoginDto>(model));
+            var userId = await _authenticationService.Login(_mapper.Map<UserLoginDto>(model));
 
-            var tokenString = _authenticationService.GenerateJsonWebToken(userId);
+            var tokenString = _jwtAuthenticationService.GenerateJsonWebToken(userId);
 
             return Ok(new {token = tokenString});
         }
 
         [AllowAnonymous]
         [HttpPost("[action]")]
-        public IActionResult Login([FromBody] UserLoginModel loginUser)
+        public async Task<IActionResult> Login([FromBody] UserLoginModel loginUser)
         {
-            var userId = _authenticationService.Login(_mapper.Map<UserLoginDto>(loginUser));
+            var userId = await _authenticationService.Login(_mapper.Map<UserLoginDto>(loginUser));
 
-            var tokenString = _authenticationService.GenerateJsonWebToken(userId);
+            var tokenString = _jwtAuthenticationService.GenerateJsonWebToken(userId);
 
             return Ok(new {token = tokenString});
-    }
+        }
     }
 }

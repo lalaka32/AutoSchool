@@ -41,10 +41,7 @@ namespace DataService.Services.Implementations
             entity.UserId = currentUser.Id;
             entity.AddedAt = DateTime.Now;
             entity.UpdatedAt = DateTime.Now;
-            entity.RuleSection = new RuleSection()
-            {
-                Id = (int) Common.Enums.RuleSection.Cross
-            };
+            entity.RuleSectionId = (int) Common.Enums.RuleSection.Cross;
             var id = _drivingTestRepository.Create(entity);
             return id;
         }

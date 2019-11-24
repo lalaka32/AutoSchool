@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
+﻿using System.Collections.Generic;
 using AutoMapper;
 using Common.DataContracts.User;
 using Common.Ecxeptions;
+using Common.Enums.User;
 using DataAccess.Interfaces;
 using DataService.Services.Interfaces;
-using Microsoft.AspNetCore.Http;
 
 namespace DataService.Services.Implementations
 {
@@ -15,13 +12,27 @@ namespace DataService.Services.Implementations
     {
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
-        private readonly IHttpContextAccessor _contextAccessor;
+        private readonly IAuthenticationService _authenticationService;
 
-        public UserService(IUserRepository userRepository, IMapper mapper, IHttpContextAccessor contextAccessor)
+        private readonly Dictionary<Role, IEnumerable<int>> _roleExcludeRoles = new Dictionary<Role, IEnumerable<int>>()
+        {
+            {Role.Administrator, new List<int>()},
+            {
+                Role.AutoSchoolAdministrator,
+                new List<int> {(int) Role.Administrator, (int) Role.AutoSchoolAdministrator}
+            },
+            {
+                Role.AutoSchoolEmployee,
+                new List<int>
+                    {(int) Role.Administrator, (int) Role.AutoSchoolAdministrator, (int) Role.AutoSchoolEmployee}
+            },
+        };
+
+        public UserService(IUserRepository userRepository, IMapper mapper, IAuthenticationService authenticationService)
         {
             _userRepository = userRepository;
             _mapper = mapper;
-            _contextAccessor = contextAccessor;
+            _authenticationService = authenticationService;
         }
 
         public int Create(UserCreateDto dto)
@@ -47,19 +58,19 @@ namespace DataService.Services.Implementations
 
         public UserDto GetCurrentUser()
         {
-            var userIdString = _contextAccessor.HttpContext.User.Claims.FirstOrDefault(x =>
-                x.Type.Equals(JwtRegisteredClaimNames.Jti, StringComparison.InvariantCultureIgnoreCase))?.Value;
-            if (userIdString == null)
-            {
-                throw new MissingFieldException("Id is null");
-            }
-
-            var user = _userRepository.Get(int.Parse(userIdString));
+            var user = _userRepository.Get(_authenticationService.GetCurrentUserId());
             return _mapper.Map<UserDto>(user);
         }
 
         public IReadOnlyCollection<UserCollectionItemDto> Search(UserCollectionFilterDto filter)
         {
+            if (filter.Login == null)
+            {
+                var currentUser = _userRepository.Get(_authenticationService.GetCurrentUserId());
+
+                filter.ExcludeRoles = _roleExcludeRoles[(Role) currentUser.RoleId];
+            }
+
             var result = _userRepository.Search(filter);
             return _mapper.Map<IReadOnlyCollection<UserCollectionItemDto>>(result);
         }
