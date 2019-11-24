@@ -9,21 +9,23 @@ using System.Text;
 using System.Threading.Tasks;
 using Common.Authorization;
 using Common.Ecxeptions;
+using DataAccess.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.IdentityModel.Tokens;
 
 namespace DataService.Services.Implementations
 {
     public class JwtAuthenticationService : IJwtAuthenticationService
     {
-        private readonly IUserService _userService;
+        private readonly IUserRepository _userRepository;
 
-        public JwtAuthenticationService(IUserService userService)
+        public JwtAuthenticationService(IUserRepository userRepository)
         {
-            _userService = userService;
+            _userRepository = userRepository;
         }
         public string GenerateJsonWebToken(int userId)
         {
-            var user = _userService.Get(userId);
+            var user = _userRepository.Get(userId);
             
             var securityKey = AuthOptions.GetSymmetricSecurityKey();
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
@@ -42,7 +44,7 @@ namespace DataService.Services.Implementations
 
         public int Login(UserLoginDto dto)
         {
-            var user = _userService.Search(new UserCollectionFilterDto
+            var user = _userRepository.Search(new UserCollectionFilterDto
             {
                 Login = dto.Login
             }).FirstOrDefault();

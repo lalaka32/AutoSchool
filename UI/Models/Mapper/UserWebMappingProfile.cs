@@ -18,6 +18,8 @@ namespace UI.Models.Mapper
                 .ForMember(dto => dto.RoleId, options => options.Ignore());
 
             CreateMap<UserRegistryModel, UserLoginDto>();
+            
+            CreateMap<UserCollectionItemDto, UserCollectionItemModel>();
         }
     }
 }

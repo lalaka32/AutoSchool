@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using DataAccess.Interfaces;
 using ICookieAuthenticationService = DataService.Services.Interfaces.ICookieAuthenticationService;
 
 namespace DataService.Services.Implementations
@@ -16,17 +17,17 @@ namespace DataService.Services.Implementations
     public class CookieAuthenticationService : ICookieAuthenticationService
     {
         private readonly IHttpContextAccessor _context;
-        private readonly IUserService _userService;
+        private readonly IUserRepository _userRepository;
 
-        public CookieAuthenticationService(IHttpContextAccessor context, IUserService userService)
+        public CookieAuthenticationService(IHttpContextAccessor context, IUserRepository userRepository)
         {
             _context = context;
-            _userService = userService;
+            _userRepository = userRepository;
         }
 
         public async Task Login(UserLoginDto dto)
         {
-            var user = _userService.Search(new UserCollectionFilterDto
+            var user = _userRepository.Search(new UserCollectionFilterDto
             {
                 Login = dto.Login
             }).FirstOrDefault();
@@ -34,17 +35,19 @@ namespace DataService.Services.Implementations
             {
                 throw new BadOperationException(ErrorCode.WrongLogin);
             }
+
             if (user.Password != dto.Password)
             {
                 throw new BadOperationException(ErrorCode.WrongPassword);
             }
+
             await SetCookie(user.Id, dto.Login);
         }
 
         public async Task Logout()
         {
             await _context.HttpContext.SignOutAsync(
-             CookieAuthenticationDefaults.AuthenticationScheme);
+                CookieAuthenticationDefaults.AuthenticationScheme);
         }
 
         private async Task SetCookie(int id, string login)

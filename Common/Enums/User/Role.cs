@@ -3,7 +3,9 @@ namespace Common.Enums.User
     public enum Role
     {
         Administrator = 1,
-        SiteUser = 2,
-        Student = 3
+        AutoSchoolAdministrator = 2,
+        AutoSchoolEmployee = 3,
+        Student = 4,
+        SiteUser = 5,
     }
 }

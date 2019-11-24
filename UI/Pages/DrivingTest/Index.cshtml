@@ -16,12 +16,12 @@
         </tr>
     </thead>
     <tbody>
-        @for(var i = 0; i < Model.testModels.Length; i++)
+        @for(var i = 0; i < Model.TestModels.Length; i++)
         {
             <tr>
                 <th scope="row">@i</th>
-                <td>@Model.testModels[i].UpdatedAt</td>
-                <td>@Model.testModels[i].Success</td>
+                <td>@Model.TestModels[i].UpdatedAt</td>
+                <td>@Model.TestModels[i].Success</td>
                 <td>Details</td>
             </tr>
         }

@@ -1,10 +1,10 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Common.Authorization;
 using Common.Ecxeptions;
+using Common.ModelErrors;
 using Microsoft.AspNetCore.Http;
-using Middleware.Authorization;
-using Middleware.ModelErrors;
 using Newtonsoft.Json;
 
 namespace Middleware.MiddleWare

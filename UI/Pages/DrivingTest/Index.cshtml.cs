@@ -15,23 +15,25 @@ namespace UI.Pages.DrivingTest
     {
         private readonly IDrivingTestService _drivingTestService;
         private readonly IMapper _mapper;
+        private readonly IUserService _userService;
 
-        [BindProperty]
-        public DrivingTestCollectionItemModel[] testModels { get; set; }
+        [BindProperty] public DrivingTestCollectionItemModel[] TestModels { get; set; }
 
-        public IndexModel(IDrivingTestService drivingTestService, IMapper mapper)
+        public IndexModel(IDrivingTestService drivingTestService, IMapper mapper, IUserService userService)
         {
             _drivingTestService = drivingTestService;
             _mapper = mapper;
+            _userService = userService;
         }
 
         public void OnGet()
         {
+            var currentUser = _userService.GetCurrentUser();
             var dtos = _drivingTestService.GetUserHistory(new DrivingTestCollectionFilterDto
             {
-                UserId = 1
+                UserId = currentUser.Id
             });
-            testModels = _mapper.Map<DrivingTestCollectionItemModel[]>(dtos);
+            TestModels = _mapper.Map<DrivingTestCollectionItemModel[]>(dtos);
         }
     }
 }

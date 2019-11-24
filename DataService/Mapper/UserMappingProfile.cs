@@ -12,7 +12,9 @@ namespace DataService.Mapper
     {
         public UserMappingProfile()
         {
-            CreateMap<User, UserCollectionItemDto>();
+            CreateMap<User, UserCollectionItemDto>()
+                .ForMember(entity => entity.RoleName,
+                    opts => opts.MapFrom(dto => dto.Role.Name));
             CreateMap<User, UserDto>()
                 .ForMember(entity => entity.Role,
                     opts => opts.MapFrom(dto => (Role) dto.RoleId));
