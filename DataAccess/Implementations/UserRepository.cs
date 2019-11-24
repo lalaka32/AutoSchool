@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using AutoMapper;
 using Common.BusinessObjects;
+using Common.Entities;
 
 namespace DataAccess.Implementations
 {
@@ -47,6 +48,29 @@ namespace DataAccess.Implementations
                 .Include(u => u.Role)
                 .AsNoTracking()
                 .FirstOrDefault(u => u.Id == id);
+        }
+
+        public IReadOnlyCollection<Role> GetRoles()
+        {
+            return _context.Roles
+                .AsNoTracking()
+                .ToList()
+                .AsReadOnly();
+        }
+
+        public bool Update(UserDto userDto)
+        {
+            var entity = _context.Users
+                .Include(u => u.Role)
+                .FirstOrDefault(u => u.Id == userDto.Id);
+            if (entity != null)
+            {
+                entity.RoleId = (int) userDto.Role;
+                _context.SaveChanges();
+                return true;
+            }
+
+            return false;
         }
     }
 }
