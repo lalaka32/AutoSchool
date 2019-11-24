@@ -1,0 +1,24 @@
+@page
+@model UI.Pages.User.Edit
+
+@{
+    ViewData["Title"] = "Edit user";
+}
+
+<h1>Edit user</h1>
+
+<form method="post">
+    <input asp-for="userModel.Id" type="hidden"/>
+    <input asp-for="userModel.Login" type="hidden"/>
+    <input asp-for="userModel.Password" type="hidden"/>
+    <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+    <label for="login">Login</label><br/>
+    <label name="login" id="login">@Model.userModel.Login</label><br/>
+    <label>Role</label><br/>
+    @Html.DropDownListFor(model => model.userModel.RoleId, Model.roles.Select(x => new SelectListItem
+    {Selected = x.Id == Model.userModel.RoleId, Text = x.Name, Value = x.Id.ToString()}), "Select role", new {@class = "form-control"})
+    @Html.ValidationMessageFor(model => model.userModel.RoleId, "", new {@class = "text-danger"})
+    <hr/>
+    <input type="submit" value="Edit"/>
+    <a asp-page="Index">Cancel</a>
+</form>

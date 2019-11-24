@@ -14,6 +14,7 @@
     <label for="password">Password</label><br />
     <input name="password" id="password" asp-for="loginModel.Password" type="password" required /><br /><br />
     <span asp-validation-for="loginModel.Password" class="text-danger"></span>
+    <hr/>
     <input type="submit" value="Login" />
     <a asp-page="Register">SignUp</a>
 </form>

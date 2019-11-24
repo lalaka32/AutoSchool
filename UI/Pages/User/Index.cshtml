@@ -5,7 +5,7 @@
     ViewData["Title"] = "Users";
 }
 
-<h1>History</h1>
+<h1>Users</h1>
 
 <table class="table table-bordered">
     <thead>
@@ -17,13 +17,15 @@
     </tr>
     </thead>
     <tbody>
-    @for(var i = 0; i < Model.UserModels.Length; i++)
+    @for (var i = 0; i < Model.UserModels.Length; i++)
     {
         <tr>
             <th scope="row">@i</th>
             <td>@Model.UserModels[i].RoleName</td>
             <td>@Model.UserModels[i].Login</td>
-            <td>Details</td>
+            <td>
+                <a asp-page="Edit" asp-route-id="@Model.UserModels[i].Id">Edit</a>
+            </td>
         </tr>
     }
     </tbody>

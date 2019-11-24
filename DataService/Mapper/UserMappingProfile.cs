@@ -24,6 +24,7 @@ namespace DataService.Mapper
                 .ForMember(entity => entity.Role, opts => opts.Ignore());
             //.ForMember(entity => entity.Progress, opts => opts.Ignore())
             //.ForMember(entity => entity.ProgressId, opts => opts.Ignore());
+            CreateMap<Common.Entities.Role, RoleDto>();
         }
     }
 }

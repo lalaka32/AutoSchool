@@ -74,5 +74,17 @@ namespace DataService.Services.Implementations
             var result = _userRepository.Search(filter);
             return _mapper.Map<IReadOnlyCollection<UserCollectionItemDto>>(result);
         }
+
+        public IReadOnlyCollection<RoleDto> GetAllRoles()
+        {
+            var dtos = _userRepository.GetRoles();
+            return _mapper.Map<IReadOnlyCollection<RoleDto>>(dtos);
+        }
+
+        public int Update(UserDto userDto)
+        {
+            _userRepository.Update(userDto);
+            return userDto.Id;
+        }
     }
 }
