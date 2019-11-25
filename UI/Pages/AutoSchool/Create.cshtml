@@ -1,0 +1,18 @@
+@page
+@model UI.Pages.AutoSchool.Create
+
+@{
+    ViewData["Title"] = "Create auto school";
+}
+
+<h1>Create school</h1>
+
+<form method="post">
+    <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+    <label for="name">Name</label><br/>
+    <input type="text" asp-for="AutoSchool.Name" name="name" id="name"><br/>
+    @Html.ValidationMessageFor(model => model.AutoSchool.Name, "", new {@class = "text-danger"})
+    <hr/>
+    <input type="submit" value="Create"/>
+    <a asp-page="Index">Cancel</a>
+</form>

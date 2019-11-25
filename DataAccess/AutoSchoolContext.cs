@@ -17,7 +17,7 @@ namespace DataAccess
 
 		public DbSet<RuleSection> RulesSections { get; set; }
 		
-		public DbSet<AutoClassGroupe> AutoClassGroupes { get; set; }
+		public DbSet<AutoClassGroup> AutoClassGroups { get; set; }
 
 		//public DbSet<Qualifications> Qualifications { get; set; }
 
@@ -27,7 +27,7 @@ namespace DataAccess
 
 		public DbSet<AutoSchool> AutoSchools { get; set; }
 
-		public DbSet<EmployeeLecturer> EmployeeLecturers { get; set; }
+		public DbSet<AutoSchoolEmployee> AutoSchoolEmployees { get; set; }
 
 		public DbSet<Progress> Progresses { get; set; }
 

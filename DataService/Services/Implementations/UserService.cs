@@ -81,7 +81,7 @@ namespace DataService.Services.Implementations
             return _mapper.Map<IReadOnlyCollection<RoleDto>>(dtos);
         }
 
-        public int Update(UserDto userDto)
+        public int Update(UserUpdateDto userDto)
         {
             _userRepository.Update(userDto);
             return userDto.Id;

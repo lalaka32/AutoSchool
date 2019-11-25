@@ -1,0 +1,32 @@
+@page
+@model UI.Pages.AutoSchoolEmployee.Index
+
+@{
+    ViewData["Title"] = "Employees";
+}
+
+<h1>Employees</h1>
+
+<div>
+    <a asp-page="Create" asp-route-id="@Model.AutoSchoolId">Add employee</a>
+</div>
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Login</th>
+        <th scope="col">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    @for (var i = 0; i < Model.AutoSchoolEmployeeModels.Length; i++)
+    {
+        <tr>
+            <th scope="row">@i</th>
+            <td>@Model.AutoSchoolEmployeeModels[i].Lecturer.Login</td>
+            <td>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

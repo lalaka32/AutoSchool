@@ -5,7 +5,7 @@ using Common.BusinessObjects;
 
 namespace Common.Entities
 {
-	public class EmployeeLecturer
+	public class AutoSchoolEmployee
 	{
 		public int Id { get; set; }
 

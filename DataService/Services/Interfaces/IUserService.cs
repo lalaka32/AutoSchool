@@ -17,6 +17,6 @@ namespace DataService.Services.Interfaces
 
         IReadOnlyCollection<RoleDto> GetAllRoles();
         
-        int Update(UserDto userDto);
+        int Update(UserUpdateDto userDto);
     }
 }

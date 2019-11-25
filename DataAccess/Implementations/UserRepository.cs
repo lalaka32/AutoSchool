@@ -58,14 +58,14 @@ namespace DataAccess.Implementations
                 .AsReadOnly();
         }
 
-        public bool Update(UserDto userDto)
+        public bool Update(UserUpdateDto userDto)
         {
             var entity = _context.Users
                 .Include(u => u.Role)
                 .FirstOrDefault(u => u.Id == userDto.Id);
             if (entity != null)
             {
-                entity.RoleId = (int) userDto.Role;
+                entity.RoleId = userDto.RoleId;
                 _context.SaveChanges();
                 return true;
             }

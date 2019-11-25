@@ -14,6 +14,6 @@ namespace DataAccess.Interfaces
         User Get(int id);
         
         IReadOnlyCollection<Role> GetRoles();
-        bool Update(UserDto userDto);
+        bool Update(UserUpdateDto userDto);
     }
 }
