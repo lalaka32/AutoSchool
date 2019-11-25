@@ -1,0 +1,36 @@
+@page
+@model UI.Pages.AutoSchoolGroup.Index
+
+@{
+    ViewData["Title"] = "AutoSchool groups";
+}
+
+<h1>Groups</h1>
+
+<div>
+    <a asp-page="Create" asp-route-id="@Model.AutoSchoolId">Create group</a>
+</div>
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Category</th>
+        <th scope="col">Created</th>
+        <th scope="col">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    @for (var i = 0; i < Model.Groups.Length; i++)
+    {
+        <tr>
+            <th scope="row">@i</th>
+            <td>@Model.Groups[i].Name</td>
+            <td>@Model.Groups[i].CategoryName</td>
+            <td>@Model.Groups[i].UpdatedAt</td>
+            <td>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

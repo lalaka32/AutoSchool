@@ -1,0 +1,27 @@
+@page
+@model UI.Pages.AutoSchoolGroup.Create
+
+@{
+    ViewData["Title"] = "Create auto school group";
+}
+
+<h1>Create group</h1>
+
+<form method="post">
+    <input asp-for="AutoSchoolId" type="hidden"/>
+    <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+    <label for="name">Group name</label><br/>
+    <input type="text" asp-for="@Model.GroupModel.Name" name="name" id="name"><br/>
+    @Html.ValidationMessageFor(model => model.GroupModel.Name, "", new {@class = "text-danger"})
+    <label>Group category</label><br/>
+    @Html.DropDownListFor(model => model.GroupModel.CategoryId, Model.Categories.Select(x => new SelectListItem
+    { Text = x.Name, Value = x.Id.ToString()}), "Select category", new {@class = "form-control"})
+    @Html.ValidationMessageFor(model => model.GroupModel.CategoryId, "", new {@class = "text-danger"})
+    <label>Group lecher</label><br/>
+    @Html.DropDownListFor(model => model.GroupModel.LecturerId, Model.Lecturers.Select(x => new SelectListItem
+    { Text = x.Lecturer.Login, Value = x.Id.ToString()}), "Select lecher", new {@class = "form-control"})
+    @Html.ValidationMessageFor(model => model.GroupModel.CategoryId, "", new {@class = "text-danger"})
+    <hr/>
+    <input type="submit" value="Create"/>
+    <a asp-page="Index">Cancel</a>
+</form>

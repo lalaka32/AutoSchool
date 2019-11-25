@@ -1,0 +1,29 @@
+@page
+@model UI.Pages.AutoSchoolAdmin.Index
+
+@{
+    ViewData["Title"] = "School admins";
+}
+
+<h1>School admins</h1>
+<div>
+    <a asp-page="Create" asp-route-id="@Model.AutoSchoolId">Add new admin</a>
+</div>
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Login</th>
+        <th scope="col">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    @for (var i = 0; i < Model.AutoSchoolAdminModels.Length; i++)
+    {
+        <tr>
+            <th scope="row">@i</th>
+            <td>@Model.AutoSchoolAdminModels[i].Admin.Login</td>
+        </tr>
+    }
+    </tbody>
+</table>

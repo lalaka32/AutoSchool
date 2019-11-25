@@ -14,6 +14,10 @@ namespace Common.BusinessObjects
 
 		public string Password { get; set; }
 
+		public int? AutoClassGroupId { get; set; }
+
+		public AutoClassGroup AutoClassGroup { get; set; }
+
        // public int ProgressId { get; set; }
        
        // public Progress Progress { get; set; }

@@ -27,8 +27,19 @@ namespace UI.Models.Mapper
 
             CreateMap<UserModel, UserDto>()
                 .ForMember(model => model.Role, options => options.MapFrom(dto => (Role) dto.RoleId));
+            
+            CreateMap<Common.BusinessObjects.User, UserModel>()
+                .ForMember(model => model.RoleId, options => options.MapFrom(dto => dto.Role.Id));
 
             CreateMap<RoleDto, RoleModel>();
+            
+            CreateMap<UserDto, UserEditModel>()
+                .ForMember(model => model.RoleId, options => options.MapFrom(dto => (int) dto.Role));
+
+            CreateMap<UserEditModel, UserDto>()
+                .ForMember(model => model.Role, options => options.MapFrom(dto => (Role) dto.RoleId));
+            
+            
         }
     }
 }
