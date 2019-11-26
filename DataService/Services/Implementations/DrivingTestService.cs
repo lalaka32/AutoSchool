@@ -34,6 +34,13 @@ namespace DataService.Services.Implementations
             return mappedResult;
         }
 
+        public DrivingTestDto GetTest(int id)
+        {
+            var result = _drivingTestRepository.Get(id);
+            var mappedResult = _mapper.Map<DrivingTestDto>(result);
+            return mappedResult;
+        }
+
         public int CreateCrossTest(DrivingTestCreateDto dto)
         {
             var currentUser = _userService.GetCurrentUser();

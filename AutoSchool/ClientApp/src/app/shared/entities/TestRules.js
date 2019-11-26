@@ -1,10 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var TestRules = /** @class */ (function () {
-    function TestRules(id, rulesSectionId, rulesSections, drivingTestId, drivingTest) {
+    function TestRules(id, ruleSectionId, ruleSection, drivingTestId, drivingTest) {
         this.id = id;
-        this.rulesSectionId = rulesSectionId;
-        this.rulesSections = rulesSections;
+        this.ruleSectionId = ruleSectionId;
+        this.ruleSection = ruleSection;
         this.drivingTestId = drivingTestId;
         this.drivingTest = drivingTest;
     }

@@ -1,0 +1,55 @@
+<h1>Test description</h1>
+
+<div class="container py-2 mt-4 mb-4">
+  <h3 class="text-success" *ngIf="drivingTest.success">
+    Test passed successfully
+  </h3>
+  <h3 class="text-danger" *ngIf="!drivingTest.success">Test failed</h3>
+
+  <div class="text-black-50">Rule section of test: {{ drivingTest.ruleSectionName }}</div>
+
+  <h3>List of test situations</h3>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">Road situations</th>
+        <th scope="col">Success</th>
+        <th scope="col">Signs</th>
+        <th scope="col">TrafficLight</th>
+        <th scope="col">Vip</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let p of drivingTest.roadSituations; let i = index">
+        <th scope="row" class="text-center">Situation {{ i }}</th>
+
+        <td *ngIf="p?.success; else fail"><img src="../../assets/ok.png" alt="success" class="img-thumbnail img-fluid img-1" /></td>
+
+        <td *ngIf="p?.hasSigns; else unset">
+          <img src="../../assets/sign.png" alt="sign" class="img-thumbnail img-fluid img-1" />
+        </td>
+
+        <td *ngIf="p?.hasTrafficLight; else unset">
+          <img
+            src="../../assets/trafficLight.png"
+            alt="sign"
+            class="img-thumbnail img-fluid img-1"
+          />
+        </td>
+
+        <td *ngIf="p?.hasVip; else unset">
+          <img src="../../assets/police.png" alt="vip" class="img-thumbnail img-fluid img-1" />
+        </td>
+
+        <ng-template #unset>
+          <td></td>
+        </ng-template>
+        <ng-template #fail>
+            <td><img src="../../assets/delete.png" alt="fail" class="img-thumbnail img-fluid img-1" /></td>
+          </ng-template>
+
+      </tr>
+    </tbody>
+  </table>
+  <button routerLink="/" class="button">Go back</button>
+</div>

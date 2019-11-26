@@ -29,6 +29,13 @@ namespace DataAccess.Implementations
             return result.AsReadOnly();
         }
 
+        public DrivingTest Get(int i)
+        {
+            var result = _context.DrivingTests.Include(x => x.RoadSituations).Include(x => x.RuleSection).AsNoTracking().
+                FirstOrDefault(x => x.Id == i);
+            return result;
+        }
+
         public int Create(DrivingTest entity)
         {
             _context.DrivingTests.Add(entity);

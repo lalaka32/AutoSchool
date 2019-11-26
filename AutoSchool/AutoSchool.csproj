@@ -41,14 +41,16 @@
   <ItemGroup>
     <None Remove="ClientApp\src\app\shared\entities\DrivingTest.ts" />
     <None Remove="ClientApp\src\app\shared\entities\Progress.ts" />
+    <None Remove="ClientApp\src\app\shared\entities\RoadSituation.ts" />
     <None Remove="ClientApp\src\app\shared\entities\Role.ts" />
-    <None Remove="ClientApp\src\app\shared\entities\RulesSection.ts" />
     <None Remove="ClientApp\src\app\shared\entities\TestRules.ts" />
     <None Remove="ClientApp\src\app\shared\entities\User.ts" />
     <None Remove="ClientApp\src\app\shared\interceptors\httpInterceptor.ts" />
     <None Remove="ClientApp\src\app\shared\services\AuthorizationCheck.ts" />
     <None Remove="ClientApp\src\app\shared\services\AuthService.ts" />
     <None Remove="ClientApp\src\app\shared\services\DrivingTestService.ts" />
+    <None Remove="ClientApp\src\app\test-description.ts" />
+    <None Remove="ClientApp\src\app\test-description\test-description.component.html" />
   </ItemGroup>
 
   <ItemGroup>
@@ -64,15 +66,21 @@
 
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\app\shared\entities\DrivingTest.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\shared\entities\RoadSituation.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\src\app\shared\entities\Progress.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\shared\entities\Role.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\shared\entities\RulesSection.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\shared\entities\TestRules.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\shared\entities\User.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\shared\interceptors\httpInterceptor.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\shared\services\AuthorizationCheck.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\shared\services\AuthService.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\shared\services\DrivingTestService.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\test-description\test-description.component.html">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\app\test-description\test-description.component.ts" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

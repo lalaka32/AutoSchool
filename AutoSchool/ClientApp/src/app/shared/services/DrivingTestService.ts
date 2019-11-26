@@ -6,12 +6,20 @@ import { DrivingTest } from '../entities/DrivingTest';
 @Injectable()
 export class DrivingTestService {
 
-    private url = "/api/TestResult";
+    private url = "/api/testResult";
 
     constructor(private http: HttpClient) {
     }
 
-    get() {
-        return this.http.get(this.url + '/GetAllByUser');
+    getTests() {
+        return this.http.get(this.url + '/getAllByUser');
     }
+
+    getTest(id: number) {
+        return this.http.get(this.url + '/get/' + id);
+    }
+
+    //getTestRoadSituations() {
+    //    return this.http.get(this.url + '/Get');
+    //}
 }

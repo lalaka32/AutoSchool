@@ -16,7 +16,7 @@ namespace Common.BusinessObjects
         
         public RuleSection RuleSection { get; set; }
 
-        public ICollection<RoadSituation> RoadSituation { get; set; }
+        public ICollection<RoadSituation> RoadSituations { get; set; }
 
         public DateTime AddedAt { get; set; }
 
@@ -26,7 +26,7 @@ namespace Common.BusinessObjects
 
         public DrivingTest()
         {
-            RoadSituation = new List<RoadSituation>();
+            RoadSituations = new List<RoadSituation>();
         }
     }
 }

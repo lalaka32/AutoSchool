@@ -10,8 +10,10 @@ namespace DataService.Services.Interfaces
 	public interface IDrivingTestService
 	{
 		IReadOnlyCollection<DrivingTestCollectionItemDto> GetUserHistory(DrivingTestCollectionFilterDto filter);
-		
-		int CreateCrossTest(DrivingTestCreateDto dto);
+
+        DrivingTestDto GetTest(int id);
+
+        int CreateCrossTest(DrivingTestCreateDto dto);
 
 	}
 }
