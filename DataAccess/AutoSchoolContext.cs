@@ -17,6 +17,10 @@ namespace DataAccess
 
         public DbSet<RoadSituation> RoadSituations { get; set; }
 
+	public DbSet<RuleSection> RulesSections { get; set; }
+		
+	public DbSet<AutoClassGroup> AutoClassGroups { get; set; }
+
         public DbSet<RuleSection> RuleSections { get; set; }
 
         public DbSet<AutoClassGroupe> AutoClassGroupes { get; set; }
@@ -24,6 +28,8 @@ namespace DataAccess
         //public DbSet<Qualifications> Qualifications { get; set; }
 
         public DbSet<CategoryOfDriverLicence> CategoryOfDriverLicences { get; set; }
+
+	public DbSet<AutoSchoolEmployee> AutoSchoolEmployees { get; set; }
 
         public DbSet<AutoSchoolAdmin> AutoSchoolAdmins { get; set; }
 

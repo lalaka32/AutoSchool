@@ -1,0 +1,20 @@
+@page
+@model UI.Pages.AutoSchoolAdmin.Create
+
+@{
+    ViewData["Title"] = "Add school admin";
+}
+
+<h1>Add admin</h1>
+
+<form method="post">
+    <input asp-for="AutoSchoolId" type="hidden"/>
+    <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+    <label>User login</label><br/>
+    @Html.DropDownListFor(model => model.SelectedUserId, Model.UserModels.Select(x => new SelectListItem
+    { Text = x.Login, Value = x.Id.ToString()}), "Select user", new {@class = "form-control"})
+    @Html.ValidationMessageFor(model => model.SelectedUserId, "", new {@class = "text-danger"})
+    <hr/>
+    <input type="submit" value="Add"/>
+    <a asp-page="Index" asp-route-id="@Model.AutoSchoolId">Cancel</a>
+</form>
