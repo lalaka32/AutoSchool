@@ -6,6 +6,6 @@ namespace Common.DataContracts.DrivingTest
     {
         public bool? Success { get; set; }
         
-        public IEnumerable<RoadSituationCreateDto> RoadSituation { get; set; }
+        public IEnumerable<RoadSituationCreateDto> RoadSituations { get; set; }
     }
 }

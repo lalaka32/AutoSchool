@@ -14,6 +14,12 @@ namespace DataService.Mapper
         {
             CreateMap<DrivingTest, DrivingTestCollectionItemDto>();
 
+            CreateMap<RoadSituation, RoadSituationCollectionItemDto>();
+            
+            CreateMap<DrivingTest, DrivingTestDto>()
+               .ForMember(entity => entity.RuleSectionName,
+                    opts => opts.MapFrom(dto => dto.RuleSection.Name));
+
             CreateMap<DrivingTestCreateDto, DrivingTest>()
                 .ForMember(entity => entity.Id, opts => opts.Ignore())
                 .ForMember(entity => entity.User, opts => opts.Ignore())

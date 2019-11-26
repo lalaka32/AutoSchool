@@ -11,6 +11,7 @@ using DataService.Services.Implementations;
 using DataService.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using AutoSchool.Models.Driving_Test;
 
 namespace AutoSchool.Controllers
 {
@@ -37,14 +38,28 @@ namespace AutoSchool.Controllers
             return Ok();
         }
 
+        [HttpGet("[action]/{id}")]
+        public DrivingTestModel Get(int id)
+        {
+            var dto = _drivingTestService.GetTest(id);
+            return _mapper.Map<DrivingTestModel>(dto);
+        }
+
+        //[HttpGet("[action]/{id}")]
+        //public IEnumerable<RoadSituationCollectionItemModel> GetTestRoadSituations(int id)
+        //{
+        //    var dto = _drivingTestService.GetTest(id);
+        //    return _mapper.Map<DrivingTestModel>(dto);
+        //}
+
         [HttpGet("[action]")]
-        public IEnumerable<DrivingTestCollectionItemDto> GetAllByUser()
+        public IEnumerable<DrivingTestCollectionItemModel> GetAllByUser()
         {
             var dtos = _drivingTestService.GetUserHistory(new DrivingTestCollectionFilterDto
             {
                 UserId = _authenticationService.GetCurrentUserId()
             });
-            return dtos;
+            return _mapper.Map<IEnumerable<DrivingTestCollectionItemModel>>(dtos);
         }
     }
 }

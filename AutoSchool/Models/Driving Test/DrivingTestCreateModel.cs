@@ -6,6 +6,6 @@ namespace AutoSchool.Models
     {
         public bool? Success { get; set; }
         
-        public IEnumerable<RoadSituationCreateModel> RoadSituation { get; set; }
+        public IEnumerable<RoadSituationCreateModel> RoadSituations { get; set; }
     }
 }

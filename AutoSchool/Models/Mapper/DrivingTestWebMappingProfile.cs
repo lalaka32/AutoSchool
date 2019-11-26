@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoSchool.Models.User;
 using Common.DataContracts.DrivingTest;
 using Common.DataContracts.User;
+using AutoSchool.Models.Driving_Test;
 
 namespace AutoSchool.Models.Mapper
 {
@@ -23,6 +24,12 @@ namespace AutoSchool.Models.Mapper
             CreateMap<DrivingTestCreateModel, DrivingTestCreateDto>();
             
             CreateMap<RoadSituationCreateModel, RoadSituationCreateDto>();
+
+            CreateMap<RoadSituationCollectionItemDto, RoadSituationCollectionItemModel>();
+
+            CreateMap<DrivingTestCollectionItemDto, DrivingTestCollectionItemModel>();
+
+            CreateMap<DrivingTestDto, DrivingTestModel>();
         }
     }
 }
