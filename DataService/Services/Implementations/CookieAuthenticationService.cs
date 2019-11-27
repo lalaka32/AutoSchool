@@ -18,11 +18,13 @@ namespace DataService.Services.Implementations
     {
         private readonly IHttpContextAccessor _context;
         private readonly IUserRepository _userRepository;
+        private readonly IEncryptionService _encryptionService;
 
-        public CookieAuthenticationService(IHttpContextAccessor context, IUserRepository userRepository)
+        public CookieAuthenticationService(IHttpContextAccessor context, IUserRepository userRepository, IEncryptionService encryptionService)
         {
             _context = context;
             _userRepository = userRepository;
+            _encryptionService = encryptionService;
         }
 
         public async Task Login(UserLoginDto dto)
@@ -36,7 +38,7 @@ namespace DataService.Services.Implementations
                 throw new BadOperationException(ErrorCode.WrongLogin);
             }
 
-            if (user.Password != dto.Password)
+            if (_encryptionService.Decrypt(user.Password, user.Key, user.IV) != dto.Password)
             {
                 throw new BadOperationException(ErrorCode.WrongPassword);
             }

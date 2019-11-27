@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using AutoMapper;
+using Common.BusinessObjects;
 using Common.DataContracts.User;
 using Common.Ecxeptions;
 using Common.Enums.User;
@@ -13,6 +14,7 @@ namespace DataService.Services.Implementations
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
         private readonly IAuthenticationService _authenticationService;
+        private readonly IEncryptionService _encryptionService;
 
         private readonly Dictionary<Role, IEnumerable<int>> _roleExcludeRoles = new Dictionary<Role, IEnumerable<int>>()
         {
@@ -28,11 +30,13 @@ namespace DataService.Services.Implementations
             },
         };
 
-        public UserService(IUserRepository userRepository, IMapper mapper, IAuthenticationService authenticationService)
+        public UserService(IUserRepository userRepository, IMapper mapper, IAuthenticationService authenticationService,
+            IEncryptionService encryptionService)
         {
             _userRepository = userRepository;
             _mapper = mapper;
             _authenticationService = authenticationService;
+            _encryptionService = encryptionService;
         }
 
         public int Create(UserCreateDto dto)
@@ -47,7 +51,16 @@ namespace DataService.Services.Implementations
                 throw new BadOperationException(ErrorCode.LoginOccupied);
             }
 
-            return _userRepository.Create(dto);
+            var entity = _mapper.Map<User>(dto);
+            var data = _encryptionService.GenerateKey();
+            entity.Key = data.Key;
+            entity.IV = data.IV;
+            entity.Name = dto.Name == null ? null : _encryptionService.Encrypt(dto.Name, entity.Key, entity.IV);
+            entity.Address = dto.Address == null ? null : _encryptionService.Encrypt(dto.Address, entity.Key, entity.IV);
+            entity.Email = dto.Email == null ? null : _encryptionService.Encrypt(dto.Email, entity.Key, entity.IV);
+            entity.PhoneNumber = dto.PhoneNumber == null ? null : _encryptionService.Encrypt(dto.PhoneNumber, entity.Key, entity.IV);
+            entity.Password = dto.Password == null ? null : _encryptionService.Encrypt(dto.Password, entity.Key, entity.IV);
+            return _userRepository.Create(entity);
         }
 
         public UserDto Get(int id)

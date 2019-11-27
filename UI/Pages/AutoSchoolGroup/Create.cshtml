@@ -11,7 +11,7 @@
     <input asp-for="AutoSchoolId" type="hidden"/>
     <div class="text-danger" asp-validation-summary="ModelOnly"></div>
     <label for="name">Group name</label><br/>
-    <input type="text" asp-for="@Model.GroupModel.Name" name="name" id="name"><br/>
+    <input type="text" asp-for="@Model.GroupModel.Name" id="name"><br/>
     @Html.ValidationMessageFor(model => model.GroupModel.Name, "", new {@class = "text-danger"})
     <label>Group category</label><br/>
     @Html.DropDownListFor(model => model.GroupModel.CategoryId, Model.Categories.Select(x => new SelectListItem

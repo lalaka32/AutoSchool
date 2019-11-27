@@ -18,10 +18,12 @@ namespace DataService.Services.Implementations
     public class JwtAuthenticationService : IJwtAuthenticationService
     {
         private readonly IUserRepository _userRepository;
+        private readonly IEncryptionService _encryptionService;
 
-        public JwtAuthenticationService(IUserRepository userRepository)
+        public JwtAuthenticationService(IUserRepository userRepository, IEncryptionService encryptionService)
         {
             _userRepository = userRepository;
+            _encryptionService = encryptionService;
         }
         public string GenerateJsonWebToken(int userId)
         {
@@ -52,7 +54,7 @@ namespace DataService.Services.Implementations
             {
                 throw new BadOperationException(ErrorCode.WrongLogin);
             }
-            if (user.Password != dto.Password)
+            if (_encryptionService.Decrypt(user.Password, user.Key, user.IV) != dto.Password)
             {
                 throw new BadOperationException(ErrorCode.WrongPassword);
             }
