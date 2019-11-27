@@ -12,13 +12,25 @@ namespace Common.BusinessObjects
 
 		public string Login { get; set; }
 
-		public string Password { get; set; }
+		public byte[] Password { get; set; }
 
 		public int? AutoClassGroupId { get; set; }
 
 		public AutoClassGroup AutoClassGroup { get; set; }
 
-       // public int ProgressId { get; set; }
+		public byte[] Name { get; set; }
+
+		public byte[] Address { get; set; }
+
+		public byte[] Email { get; set; }
+
+		public byte[] PhoneNumber { get; set; }
+
+		public byte[] Key { get; set; }
+
+		public byte[] IV { get; set; }
+
+		// public int ProgressId { get; set; }
        
        // public Progress Progress { get; set; }
     }

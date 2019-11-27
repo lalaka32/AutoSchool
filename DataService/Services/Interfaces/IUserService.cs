@@ -11,8 +11,6 @@ namespace DataService.Services.Interfaces
 
         UserDto GetCurrentUser();
         
-        //int CreateAdmin(UserCreateDto dto);
-        
         IReadOnlyCollection<UserCollectionItemDto> Search(UserCollectionFilterDto filter);
 
         IReadOnlyCollection<RoleDto> GetAllRoles();

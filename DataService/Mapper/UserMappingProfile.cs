@@ -21,7 +21,13 @@ namespace DataService.Mapper
             CreateMap<UserCreateDto, User>()
                 .ForMember(entity => entity.RoleId,
                     opts => opts.MapFrom(dto => (int) dto.RoleId))
-                .ForMember(entity => entity.Role, opts => opts.Ignore());
+                .ForMember(entity => entity.Role, opts => opts.Ignore())
+                .ForMember(entity => entity.Key, opts => opts.Ignore())
+                .ForMember(entity => entity.Name, opts => opts.Ignore())
+                .ForMember(entity => entity.Email, opts => opts.Ignore())
+                .ForMember(entity => entity.Password, opts => opts.Ignore())
+                .ForMember(entity => entity.Address, opts => opts.Ignore())
+                .ForMember(entity => entity.PhoneNumber, opts => opts.Ignore());
             //.ForMember(entity => entity.Progress, opts => opts.Ignore())
             //.ForMember(entity => entity.ProgressId, opts => opts.Ignore());
             CreateMap<Common.Entities.Role, RoleDto>();

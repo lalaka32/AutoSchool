@@ -7,7 +7,7 @@ namespace DataAccess.Interfaces
 {
     public interface IUserRepository
     {
-        int Create(UserCreateDto dto);
+        int Create(User entity);
 
         IReadOnlyCollection<User> Search(UserCollectionFilterDto filter);
 

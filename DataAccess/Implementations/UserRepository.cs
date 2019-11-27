@@ -23,9 +23,8 @@ namespace DataAccess.Implementations
             _mapper = mapper;
         }
 
-        public int Create(UserCreateDto dto)
+        public int Create(User entity)
         {
-            var entity = _mapper.Map<User>(dto);
             _context.Users.Add(entity);
             _context.SaveChanges();
             return entity.Id;
